@@ -1,44 +1,9 @@
-Image folders for Madeline McCarthy portfolio (index.html)
-==========================================================
+make only the following changes. do not make any other changes besides the requested. 
 
-Place your image files in these folders (same directory as index.html).
+1. increase the size of the font and the placeholders in the featured and work card sections to decrease the side margins 
 
-HERO SLIDES (full-width hero carousel at top)
----------------------------------------------
-Folder: images/hero/
+2. The main home page slide show should be the same background as the header
 
-Expected filenames (one per slide, 6 total):
-  01-senior-thesis.jpg
-  02-shoe-handbag.jpg
-  03-fsf-case-study.jpg
-  04-stitched-up.jpg
-  05-strange-beauty.jpg
-  06-renaissance-romance.jpg
+3. fix the footer's margins to match the header's. the color of the message should be the same as a work card's title
 
-Format: Use .jpg as in the filenames above (or change the extension in index.html to .png / .webp to match your files). Images are cropped to cover. If a file is missing, the slide shows the gradient placeholder.
-
-
-FEATURED SLIDESHOW (Senior Thesis section)
-------------------------------------------
-Folder: images/featured/
-
-Expected filenames (4 images for the featured carousel):
-  01.jpg
-  02.jpg
-  03.jpg
-  04.jpg
-
-Format: JPG, PNG, or WebP. Same aspect as hero; cropped to cover.
-
-
-WORK CARDS (grid of 4 projects)
--------------------------------
-Folder: images/works/
-
-Expected filenames (one per card):
-  shoe-handbag.jpg
-  fsf-case-study.jpg
-  stitched-up.jpg
-  strange-beauty.jpg
-
-Format: JPG, PNG, or WebP. Card area is 16:10; images are cropped to cover.
+4. remove the click to scroll
