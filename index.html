@@ -49,6 +49,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
+            background: var(--gray);
             transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
         }
 
@@ -228,7 +229,7 @@
         .ph-light { background: linear-gradient(150deg, #ebe5e0 0%, #e0d6d0 50%, #d8cdc6 100%); }
 
         .ph-label {
-            font-size: 0.54rem;
+            font-size: 0.65rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
             z-index: 1;
@@ -325,34 +326,6 @@
 
         .arrow-btn + .arrow-btn { margin-left: -1px; }
 
-        /* Scroll hint — clickable */
-        .scroll-hint {
-            position: absolute;
-            bottom: 28px; left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            opacity: 0.55;
-            transition: opacity 0.5s var(--ease);
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 8px;
-        }
-
-        .scroll-hint:hover { opacity: 0.85; }
-        .scroll-hint.hidden { opacity: 0; pointer-events: none; }
-
-        .scroll-hint svg {
-            width: 20px; height: 20px;
-            display: block;
-            animation: bounce 2s var(--ease) infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(6px); }
-        }
-
         /* ========== CONTENT WRAPPER ========== */
         .content-wrap {
             max-width: var(--max-w);
@@ -385,7 +358,7 @@
 
         .featured-text h2 {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 2.35rem;
             font-weight: 300;
             color: var(--text-primary);
             line-height: 1.18;
@@ -393,7 +366,7 @@
         }
 
         .featured-text p {
-            font-size: 0.82rem;
+            font-size: 0.95rem;
             font-weight: 300;
             color: var(--text-body);
             line-height: 1.8;
@@ -515,7 +488,7 @@
         .work-card-body { padding: 20px 22px 24px; }
 
         .work-card-tag {
-            font-size: 0.54rem;
+            font-size: 0.62rem;
             font-weight: 500;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -525,7 +498,7 @@
 
         .work-card h3 {
             font-family: var(--font-display);
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 400;
             color: var(--text-primary);
             line-height: 1.3;
@@ -533,7 +506,7 @@
         }
 
         .work-desc {
-            font-size: 0.76rem;
+            font-size: 0.88rem;
             font-weight: 300;
             color: var(--text-body);
             line-height: 1.65;
@@ -555,7 +528,7 @@
         /* ========== FOOTER ========== */
         .site-footer {
             background: var(--pale-silver);
-            padding: 36px var(--pad);
+            padding: 20px var(--pad);
         }
 
         .footer-inner {
@@ -571,7 +544,7 @@
             font-size: 1.1rem;
             font-weight: 300;
             font-style: italic;
-            color: var(--text-on-pale);
+            color: var(--text-primary);
             line-height: 1.5;
             white-space: nowrap;
         }
@@ -670,7 +643,7 @@
             .feat-ss { height: 280px; }
             .works-grid { grid-template-columns: 1fr; }
 
-            .site-footer { padding: 28px var(--pad); }
+            .site-footer { padding: 20px var(--pad); }
 
             .footer-inner {
                 flex-direction: column;
@@ -747,10 +720,6 @@
                 <button class="arrow-btn" id="heroNext" aria-label="Next">&#8594;</button>
             </div>
         </div>
-
-        <button class="scroll-hint" id="scrollHint" aria-label="Scroll down">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
     </section>
 
     <!-- FEATURED -->
@@ -879,16 +848,10 @@
         document.getElementById('featPrev').addEventListener('click', feat.prev);
 
         const hdr = document.getElementById('siteHeader');
-        const sh = document.getElementById('scrollHint');
         window.addEventListener('scroll', () => {
             const y = window.scrollY;
             hdr.classList.toggle('scrolled', y > 80);
-            sh.classList.toggle('hidden', y > 100);
         }, { passive: true });
-
-        sh.addEventListener('click', () => {
-            document.getElementById('featuredSection').scrollIntoView({ behavior: 'smooth' });
-        });
 
         document.getElementById('hamburger').addEventListener('click', () => {
             document.getElementById('headerNav').classList.toggle('open');
