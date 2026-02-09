@@ -26,9 +26,9 @@
             --text-on-pale: #4A3636;
             --text-accent: #6E0A2C;
 
-            --section-gap: 64px;
-            --pad: 48px;
-            --max-w: 1200px;
+            --section-gap: 80px;
+            --pad: 56px;
+            --max-w: 1400px;
 
             --font-display: 'Cormorant Garamond', serif;
             --font-body: 'Outfit', sans-serif;
@@ -36,7 +36,7 @@
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; font-size: 112.5%; }
         body {
             font-family: var(--font-body);
             color: var(--text-primary);
@@ -49,12 +49,14 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: var(--gray);
+            background: rgba(0,0,0,0.28);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
         }
 
         .site-header.scrolled {
-            background: rgba(255,255,255,0.97);
+            background: rgba(255,255,255,0.92);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 1px 0 rgba(0,0,0,0.04);
@@ -64,12 +66,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px var(--pad);
+            padding: 24px var(--pad);
         }
 
         .header-logo a {
             font-family: var(--font-display);
-            font-size: 1.65rem;
+            font-size: 1.85rem;
             font-weight: 400;
             letter-spacing: 0.06em;
             color: var(--text-primary);
@@ -83,9 +85,9 @@
         .contact-link {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-family: var(--font-body);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 500;
             letter-spacing: 0.03em;
             text-decoration: none;
@@ -94,7 +96,7 @@
         }
 
         .contact-link .c-icon {
-            width: 16px; height: 16px;
+            width: 20px; height: 20px;
             flex-shrink: 0;
         }
 
@@ -136,8 +138,8 @@
 
         .header-nav a {
             display: block;
-            padding: 13px 18px;
-            font-size: 0.66rem;
+            padding: 15px 20px;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -197,12 +199,13 @@
         .hero-slide {
             position: absolute; inset: 0;
             opacity: 0;
+            z-index: 0;
             transition: opacity 1.2s var(--ease);
         }
 
-        .hero-slide.active { opacity: 1; }
+        .hero-slide.active { opacity: 1; z-index: 1; }
 
-        /* Placeholders */
+        /* Placeholders and images */
         .ph {
             width: 100%; height: 100%;
             display: flex;
@@ -212,16 +215,15 @@
             overflow: hidden;
         }
 
-        .ph-hero {
-            background: linear-gradient(150deg, #c4b0b3 0%, #b8a0a4 30%, #c9adb0 60%, #beaaad 100%);
+        .ph img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
-        .ph-hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse at 30% 50%, rgba(176,82,118,0.08) 0%, transparent 55%),
-                radial-gradient(ellipse at 65% 35%, rgba(117,130,77,0.06) 0%, transparent 50%);
+        .ph-hero {
+            background: var(--gray);
         }
 
         .ph-blush { background: linear-gradient(150deg, #eedfe1 0%, #e8ced2 50%, #dbbabf 100%); }
@@ -240,76 +242,76 @@
 
         .hero-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(61,46,46,0.5) 0%, rgba(61,46,46,0.08) 50%, transparent 100%);
+            background: transparent;
         }
 
-        /* Hero info box */
+        /* Hero info box — semi-transparent so image shows through, text stays readable */
         .hero-info {
             position: absolute;
-            bottom: 52px; left: var(--pad);
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.18);
-            padding: 30px 34px;
-            max-width: 460px;
+            bottom: 60px; left: var(--pad);
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 36px 42px;
+            max-width: 520px;
             z-index: 10;
         }
 
         .counter-text {
-            font-size: 0.58rem;
+            font-size: 0.68rem;
             letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--pale-silver);
+            color: var(--gold-fusion);
             margin-bottom: 12px;
         }
 
         .hero-info h2 {
             font-family: var(--font-display);
-            font-size: 1.9rem;
+            font-size: 2.2rem;
             font-weight: 300;
-            color: #fff;
+            color: var(--text-primary);
             line-height: 1.2;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .hero-info p {
-            font-size: 0.78rem;
+            font-size: 0.9rem;
             font-weight: 300;
-            color: rgba(255,255,255,0.7);
+            color: var(--text-body);
             line-height: 1.7;
             margin-bottom: 16px;
         }
 
         .hero-link {
             display: inline-block;
-            font-size: 0.64rem;
+            font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: var(--pale-silver);
+            color: var(--text-accent);
             text-decoration: none;
-            border-bottom: 1px solid rgba(219,186,191,0.35);
+            border-bottom: 1px solid rgba(110,10,44,0.25);
             padding-bottom: 2px;
             transition: color 0.3s, border-color 0.3s;
         }
 
-        .hero-link:hover { color: #fff; border-color: #fff; }
+        .hero-link:hover { color: var(--china-rose); border-color: var(--china-rose); }
 
         /* Shared arrow row */
         .arrow-row {
             display: flex;
             gap: 1px;
             margin-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(0,0,0,0.08);
             padding-top: 14px;
         }
 
         .arrow-btn {
-            width: 42px; height: 42px;
-            border: 1px solid rgba(255,255,255,0.2);
+            width: 48px; height: 48px;
+            border: 1px solid rgba(0,0,0,0.12);
             background: transparent;
-            color: rgba(255,255,255,0.65);
+            color: var(--text-body);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -319,9 +321,9 @@
         }
 
         .arrow-btn:hover {
-            background: rgba(255,255,255,0.08);
-            color: #fff;
-            border-color: rgba(255,255,255,0.35);
+            background: rgba(0,0,0,0.04);
+            color: var(--text-primary);
+            border-color: var(--china-rose);
         }
 
         .arrow-btn + .arrow-btn { margin-left: -1px; }
@@ -345,38 +347,38 @@
             border: 1px solid var(--blush-mist);
             max-width: var(--max-w);
             margin: 0 auto;
-            min-height: 380px;
+            min-height: 440px;
         }
 
         .featured-text {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 40px 36px;
+            padding: 48px 44px;
             border-right: 1px solid var(--blush-mist);
         }
 
         .featured-text h2 {
             font-family: var(--font-display);
-            font-size: 2.35rem;
+            font-size: 2.7rem;
             font-weight: 300;
             color: var(--text-primary);
             line-height: 1.18;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .featured-text p {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 300;
             color: var(--text-body);
             line-height: 1.8;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .featured-cta {
             display: inline-block;
-            margin-top: 6px;
-            font-size: 0.66rem;
+            margin-top: 8px;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -401,28 +403,29 @@
         .feat-slide {
             position: absolute; inset: 0;
             opacity: 0;
+            z-index: 0;
             transition: opacity 0.8s var(--ease);
         }
 
-        .feat-slide.active { opacity: 1; }
+        .feat-slide.active { opacity: 1; z-index: 1; }
 
         /* Featured nav — frosted box, LEFT aligned */
         .feat-nav {
             position: absolute;
-            bottom: 18px; left: 18px;
+            bottom: 22px; left: 22px;
             background: rgba(255,255,255,0.18);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px 14px;
+            padding: 12px 18px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             z-index: 5;
         }
 
         .feat-counter {
-            font-size: 0.56rem;
+            font-size: 0.65rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: rgba(255,255,255,0.75);
@@ -431,7 +434,7 @@
         .feat-arrows { display: flex; gap: 1px; }
 
         .feat-arrow {
-            width: 34px; height: 34px;
+            width: 40px; height: 40px;
             border: 1px solid rgba(255,255,255,0.2);
             background: transparent;
             color: rgba(255,255,255,0.65);
@@ -460,7 +463,7 @@
         .works-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 28px;
+            gap: 34px;
             max-width: var(--max-w);
             margin: 0 auto;
         }
@@ -485,10 +488,10 @@
             overflow: hidden;
         }
 
-        .work-card-body { padding: 20px 22px 24px; }
+        .work-card-body { padding: 26px 28px 30px; }
 
         .work-card-tag {
-            font-size: 0.62rem;
+            font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -498,15 +501,15 @@
 
         .work-card h3 {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: 400;
             color: var(--text-primary);
             line-height: 1.3;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .work-desc {
-            font-size: 0.88rem;
+            font-size: 1rem;
             font-weight: 300;
             color: var(--text-body);
             line-height: 1.65;
@@ -514,8 +517,8 @@
 
         .work-view {
             display: inline-block;
-            margin-top: 12px;
-            font-size: 0.62rem;
+            margin-top: 14px;
+            font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -528,20 +531,18 @@
         /* ========== FOOTER ========== */
         .site-footer {
             background: var(--pale-silver);
-            padding: 20px var(--pad);
+            padding: 24px var(--pad);
         }
 
         .footer-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: var(--max-w);
-            margin: 0 auto;
         }
 
         .footer-message p {
             font-family: var(--font-display);
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             font-weight: 300;
             font-style: italic;
             color: var(--text-primary);
@@ -573,14 +574,14 @@
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1024px) {
-            :root { --pad: 36px; --section-gap: 48px; }
-            .featured { grid-template-columns: 1fr 2fr; }
-            .featured-text { padding: 32px 28px; }
-            .featured-text h2 { font-size: 1.7rem; }
+            :root { --pad: 42px; --section-gap: 56px; }
+            .featured { grid-template-columns: 1fr 2fr; min-height: 380px; }
+            .featured-text { padding: 40px 34px; }
+            .featured-text h2 { font-size: 2rem; }
         }
 
         @media (max-width: 768px) {
-            :root { --pad: 24px; --section-gap: 40px; }
+            :root { --pad: 28px; --section-gap: 48px; }
 
             .hamburger { display: flex; }
             .header-contact, .header-nav { display: none; }
@@ -594,9 +595,14 @@
                 padding: 100px 28px 40px;
                 border: none;
                 z-index: 999;
+                text-align: left;
             }
 
-            .header-nav.open ul { flex-direction: column; }
+            .header-nav.open ul {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
 
             .header-nav.open a {
                 font-size: 0.92rem;
@@ -607,10 +613,12 @@
             .header-nav.open .mobile-contact {
                 display: flex !important;
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 14px;
                 margin-top: 28px;
                 padding-top: 24px;
                 border-top: 1px solid var(--pale-pink);
+                width: 100%;
             }
 
             .header-nav.open .mobile-contact .contact-link {
@@ -627,7 +635,7 @@
                 padding: 20px 22px;
             }
 
-            .hero-info h2 { font-size: 1.35rem; }
+            .hero-info h2 { font-size: 1.55rem; }
 
             .featured {
                 grid-template-columns: 1fr;
@@ -640,10 +648,10 @@
                 border-bottom: 1px solid var(--blush-mist);
             }
 
-            .feat-ss { height: 280px; }
+            .feat-ss { height: 320px; }
             .works-grid { grid-template-columns: 1fr; }
 
-            .site-footer { padding: 20px var(--pad); }
+            .site-footer { padding: 24px var(--pad); }
 
             .footer-inner {
                 flex-direction: column;
@@ -703,12 +711,12 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="hero-slide active"><div class="ph ph-hero"><span class="ph-label">Slide — Senior Thesis Collection</span></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><span class="ph-label">Slide — Shoe &amp; Handbag Designs</span></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><span class="ph-label">Slide — FSF Case Study</span></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><span class="ph-label">Slide — Stitched Up</span></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><span class="ph-label">Slide — Strange Beauty</span></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><span class="ph-label">Slide — Renaissance Romance</span></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide active"><div class="ph ph-hero"><img src="images/01.jpg" alt="Senior Thesis Collection"></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><div class="ph ph-hero"><img src="images/02.jpg" alt="Shoe &amp; Handbag Designs"></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><div class="ph ph-hero"><img src="images/03.jpg" alt="FSF Case Study"></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><div class="ph ph-hero"><img src="images/04.jpg" alt="Stitched Up"></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><div class="ph ph-hero"><img src="images/05.jpg" alt="Strange Beauty"></div><div class="hero-overlay"></div></div>
+        <div class="hero-slide"><div class="ph ph-hero"><img src="images/06.jpg" alt="Renaissance Romance"></div><div class="hero-overlay"></div></div>
 
         <div class="hero-info" id="heroInfo">
             <div class="counter-text" id="heroCounter">01 / 06</div>
@@ -732,10 +740,10 @@
                 <a href="senior-thesis.html" class="featured-cta">View Collection &rarr;</a>
             </div>
             <div class="feat-ss" id="featSS">
-                <div class="feat-slide active"><div class="ph ph-blush"><span class="ph-label">Senior Thesis — Image 1</span></div></div>
-                <div class="feat-slide"><div class="ph ph-silver"><span class="ph-label">Senior Thesis — Image 2</span></div></div>
-                <div class="feat-slide"><div class="ph ph-blush"><span class="ph-label">Senior Thesis — Image 3</span></div></div>
-                <div class="feat-slide"><div class="ph ph-silver"><span class="ph-label">Senior Thesis — Image 4</span></div></div>
+                <div class="feat-slide active"><div class="ph ph-blush"><img src="images/07.jpg" alt="Senior Thesis — Image 1"></div></div>
+                <div class="feat-slide"><div class="ph ph-silver"><img src="images/08.jpg" alt="Senior Thesis — Image 2"></div></div>
+                <div class="feat-slide"><div class="ph ph-blush"><img src="images/09.jpg" alt="Senior Thesis — Image 3"></div></div>
+                <div class="feat-slide"><div class="ph ph-silver"><img src="images/10.jpg" alt="Senior Thesis — Image 4"></div></div>
 
                 <div class="feat-nav">
                     <span class="feat-counter" id="featCounter">01 / 04</span>
@@ -752,7 +760,7 @@
     <div class="content-wrap works-wrap">
         <div class="works-grid">
             <a href="shoe-handbag.html" class="work-card reveal">
-                <div class="work-card-image"><div class="ph ph-light"><span class="ph-label">Project Image</span></div></div>
+                <div class="work-card-image"><div class="ph ph-light"><img src="images/11.jpg" alt="Shoe &amp; Handbag Designs"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Accessories</div>
                     <h3>Shoe &amp; Handbag Designs</h3>
@@ -761,7 +769,7 @@
                 </div>
             </a>
             <a href="fsf-case-study.html" class="work-card reveal">
-                <div class="work-card-image"><div class="ph ph-blush"><span class="ph-label">Project Image</span></div></div>
+                <div class="work-card-image"><div class="ph ph-blush"><img src="images/12.jpg" alt="FSF Case Study"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Case Study</div>
                     <h3>FSF Case Study</h3>
@@ -770,7 +778,7 @@
                 </div>
             </a>
             <a href="stitched-up.html" class="work-card reveal">
-                <div class="work-card-image"><div class="ph ph-silver"><span class="ph-label">Project Image</span></div></div>
+                <div class="work-card-image"><div class="ph ph-silver"><img src="images/13.jpg" alt="Stitched Up"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Project</div>
                     <h3>Stitched Up</h3>
@@ -779,7 +787,7 @@
                 </div>
             </a>
             <a href="strange-beauty.html" class="work-card reveal">
-                <div class="work-card-image"><div class="ph ph-light"><span class="ph-label">Project Image</span></div></div>
+                <div class="work-card-image"><div class="ph ph-light"><img src="images/14.jpg" alt="Strange Beauty"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Collection</div>
                     <h3>Strange Beauty</h3>
