@@ -685,12 +685,12 @@
             .header-nav.open {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 position: fixed;
                 top: 0; left: 0;
                 width: 100%; height: 100vh;
                 background: var(--white);
-                padding: 100px 28px 40px;
+                padding: 90px 28px 32px;
                 border: none;
                 z-index: 999;
                 overflow-y: auto;
@@ -722,7 +722,7 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 14px;
-                margin-top: 28px;
+                margin-top: auto;
                 padding-top: 24px;
                 border-top: 1px solid var(--pale-pink);
                 width: 100%;
@@ -938,6 +938,19 @@
     </footer>
 
     <script>
+        (function() {
+            var allExts = ['.jpg','.jpeg','.png','.webp','.gif','.svg','.JPG','.JPEG','.PNG','.WEBP','.GIF'];
+            document.querySelectorAll('img[src]').forEach(function(img) {
+                var base = img.src.replace(/\.[^/.]+$/, '');
+                var cur = (img.src.match(/\.[^/.]+$/) || [])[0];
+                var exts = allExts.filter(function(e) { return e !== cur; });
+                var i = 0;
+                img.onerror = function() {
+                    if (i < exts.length) img.src = base + exts[i++];
+                };
+            });
+        })();
+
         function slideshow(slides, counterEl, opts = {}) {
             let i = 0;
             const n = slides.length;
