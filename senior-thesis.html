@@ -266,7 +266,7 @@
         .project-hero-inner {
             max-width: 780px;
             margin: 0 auto;
-            padding: 0 var(--pad) 56px;
+            padding: 0 var(--pad) 52px;
         }
 
         .project-hero h1 {
@@ -719,14 +719,6 @@
         @media (max-width: 768px) {
             :root { --pad: 28px; --section-gap: 48px; }
 
-            .project-hero {
-                padding-top: 130px;
-            }
-
-            .project-hero-inner {
-                padding-bottom: 40px;
-            }
-
             .project-hero h1 {
                 font-size: 1.7rem;
             }
@@ -1083,6 +1075,18 @@
         window.addEventListener('scroll', function() {
             hdr.classList.add('scrolled');
         }, { passive: true });
+
+        /* ============================================================
+           HERO PADDING — match top space to bottom so title is centered
+           ============================================================ */
+        var HERO_PAD_BOTTOM = 52;
+        function adjustHeroPadding() {
+            var hero = document.querySelector('.project-hero');
+            var headerH = hdr.offsetHeight;
+            hero.style.paddingTop = (headerH + HERO_PAD_BOTTOM) + 'px';
+        }
+        adjustHeroPadding();
+        window.addEventListener('resize', adjustHeroPadding);
 
         /* ============================================================
            HAMBURGER MENU
