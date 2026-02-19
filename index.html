@@ -88,6 +88,7 @@
             color: var(--text-primary);
             text-decoration: none;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .site-header:not(.scrolled) .header-logo a { color: #fff; }
@@ -118,7 +119,7 @@
             align-items: center;
             justify-content: flex-end;
             gap: 28px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .header-contact .contact-link {
@@ -146,10 +147,8 @@
         .header-nav ul {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            row-gap: 2px;
             list-style: none;
-            white-space: normal;
+            white-space: nowrap;
         }
 
         .header-nav a {
@@ -610,19 +609,16 @@
             .featured-text h2 { font-size: 2rem; }
         }
 
-        @media (max-width: 1180px) {
+        @media (max-width: 1240px) {
             .header-top {
-                flex-wrap: wrap;
-                align-items: flex-start;
                 gap: 12px 20px;
             }
 
-            .header-logo {
-                flex: 1 1 260px;
+            .header-logo a {
+                white-space: nowrap;
             }
 
             .header-contact {
-                flex: 1 1 320px;
                 gap: 10px 18px;
             }
 
@@ -630,14 +626,50 @@
                 font-size: 0.82rem;
             }
 
+            .header-nav ul {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                column-gap: 22px;
+                row-gap: 2px;
+                white-space: normal;
+            }
+
+            .header-nav li {
+                min-width: 0;
+            }
+
             .header-nav a {
-                padding: 12px 16px;
+                padding: 12px 0;
                 font-size: 0.7rem;
                 letter-spacing: 0.12em;
             }
+
+            .header-nav a::after {
+                left: 0;
+                right: 0;
+            }
         }
 
-        @media (max-width: 960px) {
+        @media (max-width: 1040px) {
+            .header-contact {
+                gap: 8px 12px;
+            }
+
+            .header-contact .contact-link {
+                font-size: 0.76rem;
+            }
+
+            .header-nav ul {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: 16px;
+            }
+
+            .header-nav a {
+                font-size: 0.68rem;
+            }
+        }
+
+        @media (max-width: 860px) {
             .hamburger { display: flex; }
             .header-contact, .header-nav { display: none; }
 
@@ -655,6 +687,7 @@
             }
 
             .header-nav.open ul {
+                display: flex;
                 flex-direction: column;
                 align-items: flex-start;
                 width: 100%;
@@ -673,26 +706,30 @@
             .header-nav.open .mobile-contact {
                 display: flex !important;
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
                 gap: 14px;
                 margin-top: 28px;
                 padding-top: 24px;
                 border-top: 1px solid var(--pale-pink);
                 width: 100%;
+                text-align: center;
             }
 
             .header-nav.open .mobile-contact .contact-link {
                 color: var(--text-primary) !important;
                 font-size: 0.8rem;
                 align-items: center;
+                justify-content: center;
                 gap: 10px;
                 line-height: 1.2;
+                width: 100%;
             }
 
             .header-nav.open .mobile-contact .contact-link::after { display: none; }
             .header-nav.open .mobile-contact .c-icon {
                 filter: none;
                 display: block;
+                flex: 0 0 20px;
             }
         }
 
@@ -933,7 +970,7 @@
 
         const menuBtn = document.getElementById('hamburger');
         const menuNav = document.getElementById('headerNav');
-        const mobileMenuBreakpoint = 960;
+        const mobileMenuBreakpoint = 860;
 
         function isMobileMenuViewport() {
             return window.innerWidth <= mobileMenuBreakpoint;
