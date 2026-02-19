@@ -53,13 +53,6 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: rgba(0,0,0,0.28);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
-        }
-
-        .site-header.scrolled {
             background: rgba(255,255,255,0.92);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -68,9 +61,6 @@
 
         .site-header.menu-open {
             background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 1px 0 rgba(0,0,0,0.04);
         }
 
         .header-top {
@@ -95,7 +85,6 @@
             white-space: nowrap;
         }
 
-        .site-header:not(.scrolled) .header-logo a { color: #fff; }
         .site-header.menu-open .header-logo a { color: var(--text-primary); }
 
         /* Shared contact link style — header + footer */
@@ -132,12 +121,6 @@
 
         .header-contact .contact-link:hover { color: var(--china-rose); }
 
-        .site-header:not(.scrolled) .header-contact .contact-link { color: rgba(255,255,255,0.9); }
-        .site-header:not(.scrolled) .header-contact .contact-link:hover { color: #fff; }
-        .site-header:not(.scrolled) .header-contact .c-icon {
-            filter: brightness(0) invert(1);
-        }
-
         .header-nav {
             border-top: 1px solid rgba(0,0,0,0.05);
             padding: 0 var(--pad);
@@ -145,7 +128,6 @@
             scrollbar-width: none;
         }
 
-        .site-header:not(.scrolled) .header-nav { border-top-color: rgba(255,255,255,0.12); }
         .header-nav::-webkit-scrollbar { display: none; }
 
         .header-nav ul {
@@ -170,7 +152,6 @@
         }
 
         .header-nav li:first-child a { padding-left: 0; }
-        .site-header:not(.scrolled) .header-nav a { color: rgba(255,255,255,0.75); }
 
         .header-nav a::after {
             content: '';
@@ -186,7 +167,6 @@
         .header-nav li:first-child a::after { left: 0; }
         .header-nav a:hover::after { transform: scaleX(1); }
         .header-nav a:hover { color: var(--china-rose); }
-        .site-header:not(.scrolled) .header-nav a:hover { color: #fff; }
 
         .hamburger {
             display: none;
@@ -206,7 +186,6 @@
             transition: all 0.3s;
         }
 
-        .site-header:not(.scrolled) .hamburger span { background: #fff; }
         .site-header.menu-open .hamburger span { background: var(--text-primary); }
 
         .hamburger[aria-expanded="true"] span:nth-child(1) {
@@ -221,10 +200,25 @@
             transform: translateY(-6.5px) rotate(-45deg);
         }
 
-        /* ========== HERO ========== */
+        /* ========== HERO CARD ========== */
         .hero {
+            padding-top: 140px;
+            padding-bottom: 0;
+            background: var(--white);
+        }
+
+        .hero-card {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            background: var(--blush-whisper);
+            border: 1px solid var(--blush-mist);
+            overflow: hidden;
+        }
+
+        .hero-card-image {
             position: relative;
-            width: 100%; height: 100vh;
+            width: 100%;
+            aspect-ratio: 17/11;
             overflow: hidden;
             background: var(--gray);
         }
@@ -237,6 +231,93 @@
         }
 
         .hero-slide.active { opacity: 1; z-index: 1; }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-card-info {
+            padding: 36px 42px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 32px;
+            border-top: 1px solid var(--blush-mist);
+        }
+
+        .hero-card-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .counter-text {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-fusion);
+            margin-bottom: 10px;
+        }
+
+        .hero-card-info h2 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-card-info p {
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .hero-link {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .hero-link:hover { color: var(--china-rose); }
+
+        .arrow-row {
+            display: flex;
+            gap: 1px;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        .arrow-btn {
+            width: 48px; height: 48px;
+            border: 1px solid var(--blush-mist);
+            background: transparent;
+            color: var(--text-body);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .arrow-btn:hover {
+            background: var(--blush-mist);
+            color: var(--text-accent);
+            border-color: var(--pale-pink);
+        }
+
+        .arrow-btn + .arrow-btn { margin-left: -1px; }
 
         /* Placeholders and images */
         .ph {
@@ -255,108 +336,9 @@
             display: block;
         }
 
-        .ph-hero {
-            background: var(--gray);
-        }
-
         .ph-blush { background: linear-gradient(150deg, #eedfe1 0%, #e8ced2 50%, #dbbabf 100%); }
         .ph-silver { background: linear-gradient(150deg, #e4d2d5 0%, #dbbabf 50%, #d4aeb3 100%); }
         .ph-light { background: linear-gradient(150deg, #ebe5e0 0%, #e0d6d0 50%, #d8cdc6 100%); }
-
-        .ph-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            z-index: 1;
-            color: rgba(61,46,46,0.18);
-        }
-
-        .ph-hero .ph-label { color: rgba(255,255,255,0.2); }
-
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: transparent;
-        }
-
-        .hero-info {
-            position: absolute;
-            bottom: 60px; left: var(--pad);
-            background: rgba(0,0,0,0.28);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 36px 42px;
-            max-width: 520px;
-            z-index: 10;
-        }
-
-        .counter-text {
-            font-size: 0.68rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 12px;
-        }
-
-        .hero-info h2 {
-            font-family: var(--font-display);
-            font-size: 2.2rem;
-            font-weight: 300;
-            color: #fff;
-            line-height: 1.2;
-            margin-bottom: 12px;
-        }
-
-        .hero-info p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.78);
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .hero-link {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: 500;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .hero-link:hover { color: #fff; }
-
-        /* Shared arrow row */
-        .arrow-row {
-            display: flex;
-            gap: 1px;
-            margin-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding-top: 14px;
-        }
-
-        .arrow-btn {
-            width: 48px; height: 48px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: transparent;
-            color: rgba(255,255,255,0.65);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .arrow-btn:hover {
-            background: rgba(255,255,255,0.08);
-            color: #fff;
-            border-color: rgba(255,255,255,0.4);
-        }
-
-        .arrow-btn + .arrow-btn { margin-left: -1px; }
 
         /* ========== CONTENT WRAPPER ========== */
         .content-wrap {
@@ -751,13 +733,13 @@
         @media (max-width: 768px) {
             :root { --pad: 28px; --section-gap: 48px; }
 
-            .hero-info {
-                bottom: 24px; left: 16px; right: 16px;
-                max-width: none;
-                padding: 20px 22px;
+            .hero-card-info {
+                flex-direction: column;
+                padding: 24px var(--pad);
+                gap: 18px;
             }
 
-            .hero-info h2 { font-size: 1.55rem; }
+            .hero-card-info h2 { font-size: 1.55rem; }
 
             .featured {
                 grid-template-columns: 1fr;
@@ -833,21 +815,28 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="hero-slide active"><div class="ph ph-hero"><img src="images/hero/01_Website_Title_Pgs_SS3_Perspective.png" alt="Capstone Collection"></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><img src="images/hero/02_Website_Title_Pgs_SS2_Expression.png" alt="Shoe &amp; Handbag Designs"></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><img src="images/hero/03_Website_Title_Pgs_SS1_RTR_X_Stitched_Up.png" alt="Fashion Scholarship Fund"></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><img src="images/hero/04_Website_Title_Pgs_SS5_Stitched_Up.png" alt="Stitched Up"></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><img src="images/hero/05_Website_Title_Pgs_SS4_Strange_Beauty.png" alt="Strange Beauty"></div><div class="hero-overlay"></div></div>
-        <div class="hero-slide"><div class="ph ph-hero"><img src="images/hero/06_Website_Title_Pgs_SS6_Renaissance_Romance.png" alt="Renaissance Romance"></div><div class="hero-overlay"></div></div>
-
-        <div class="hero-info" id="heroInfo">
-            <div class="counter-text" id="heroCounter">01 / 06</div>
-            <h2 id="heroTitle">Capstone Collection</h2>
-            <p id="heroDesc">A culminating body of work exploring garment construction, concept development, and personal design voice.</p>
-            <a href="senior-thesis.html" class="hero-link" id="heroLink">View Project</a>
-            <div class="arrow-row">
-                <button class="arrow-btn" id="heroPrev" aria-label="Previous">&#8592;</button>
-                <button class="arrow-btn" id="heroNext" aria-label="Next">&#8594;</button>
+        <div class="content-wrap">
+            <div class="hero-card">
+                <div class="hero-card-image" id="heroImageWrap">
+                    <div class="hero-slide active"><img src="images/hero/01_Website_Title_Pgs_SS3_Perspective.png" alt="Capstone Collection"></div>
+                    <div class="hero-slide"><img src="images/hero/02_Website_Title_Pgs_SS2_Expression.png" alt="Shoe &amp; Handbag Designs"></div>
+                    <div class="hero-slide"><img src="images/hero/03_Website_Title_Pgs_SS1_RTR_X_Stitched_Up.png" alt="Fashion Scholarship Fund"></div>
+                    <div class="hero-slide"><img src="images/hero/04_Website_Title_Pgs_SS5_Stitched_Up.png" alt="Stitched Up"></div>
+                    <div class="hero-slide"><img src="images/hero/05_Website_Title_Pgs_SS4_Strange_Beauty.png" alt="Strange Beauty"></div>
+                    <div class="hero-slide"><img src="images/hero/06_Website_Title_Pgs_SS6_Renaissance_Romance.png" alt="Renaissance Romance"></div>
+                </div>
+                <div class="hero-card-info">
+                    <div class="hero-card-text">
+                        <div class="counter-text" id="heroCounter">01 / 06</div>
+                        <h2 id="heroTitle">Capstone Collection</h2>
+                        <p id="heroDesc">A culminating body of work exploring garment construction, concept development, and personal design voice.</p>
+                        <a href="senior-thesis.html" class="hero-link" id="heroLink">View Project &rarr;</a>
+                    </div>
+                    <div class="arrow-row">
+                        <button class="arrow-btn" id="heroPrev" aria-label="Previous">&#8592;</button>
+                        <button class="arrow-btn" id="heroNext" aria-label="Next">&#8594;</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -982,19 +971,15 @@
         document.getElementById('heroPrev').addEventListener('click', hero.prev);
 
         let auto = setInterval(hero.next, 6000);
-        const hi = document.getElementById('heroInfo');
-        hi.addEventListener('mouseenter', () => clearInterval(auto));
-        hi.addEventListener('mouseleave', () => { auto = setInterval(hero.next, 6000); });
+        const heroCard = document.querySelector('.hero-card');
+        heroCard.addEventListener('mouseenter', () => clearInterval(auto));
+        heroCard.addEventListener('mouseleave', () => { auto = setInterval(hero.next, 6000); });
 
         const feat = slideshow(document.querySelectorAll('.feat-slide'), document.getElementById('featCounter'));
         document.getElementById('featNext').addEventListener('click', feat.next);
         document.getElementById('featPrev').addEventListener('click', feat.prev);
 
         const hdr = document.getElementById('siteHeader');
-        window.addEventListener('scroll', () => {
-            const y = window.scrollY;
-            hdr.classList.toggle('scrolled', y > 80);
-        }, { passive: true });
 
         const menuBtn = document.getElementById('hamburger');
         const menuNav = document.getElementById('headerNav');
