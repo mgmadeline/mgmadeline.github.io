@@ -44,6 +44,10 @@
             overflow-x: hidden;
         }
 
+        body.menu-open {
+            overflow: hidden;
+        }
+
         /* ========== HEADER ========== */
         .site-header {
             position: fixed;
@@ -57,6 +61,13 @@
 
         .site-header.scrolled {
             background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+        }
+
+        .site-header.menu-open {
+            background: rgba(255,255,255,0.98);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 1px 0 rgba(0,0,0,0.04);
@@ -187,6 +198,19 @@
         }
 
         .site-header:not(.scrolled) .hamburger span { background: #fff; }
+        .site-header.menu-open .hamburger span { background: var(--text-primary); }
+
+        .hamburger[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg);
+        }
+
+        .hamburger[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg);
+        }
 
         /* ========== HERO ========== */
         .hero {
@@ -596,6 +620,7 @@
                 border: none;
                 z-index: 999;
                 text-align: left;
+                overflow-y: auto;
             }
 
             .header-nav.open ul {
@@ -608,6 +633,10 @@
                 font-size: 0.92rem;
                 padding: 14px 0;
                 color: var(--text-primary) !important;
+            }
+
+            .header-nav.open a::after {
+                display: none;
             }
 
             .header-nav.open .mobile-contact {
@@ -685,7 +714,7 @@
                     LinkedIn
                 </a>
             </div>
-            <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="headerNav" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
         <nav class="header-nav" id="headerNav">
             <ul>
@@ -861,8 +890,41 @@
             hdr.classList.toggle('scrolled', y > 80);
         }, { passive: true });
 
-        document.getElementById('hamburger').addEventListener('click', () => {
-            document.getElementById('headerNav').classList.toggle('open');
+        const menuBtn = document.getElementById('hamburger');
+        const menuNav = document.getElementById('headerNav');
+
+        function setMobileMenu(open) {
+            menuNav.classList.toggle('open', open);
+            hdr.classList.toggle('menu-open', open);
+            document.body.classList.toggle('menu-open', open && window.innerWidth <= 768);
+            menuBtn.setAttribute('aria-expanded', String(open));
+            menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+
+        menuBtn.addEventListener('click', () => {
+            setMobileMenu(!menuNav.classList.contains('open'));
+        });
+
+        menuNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMobileMenu(false));
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && menuNav.classList.contains('open')) {
+                setMobileMenu(false);
+            }
+        });
+
+        document.addEventListener('click', e => {
+            if (!menuNav.classList.contains('open') || window.innerWidth > 768) return;
+            if (menuNav.contains(e.target) || menuBtn.contains(e.target)) return;
+            setMobileMenu(false);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && menuNav.classList.contains('open')) {
+                setMobileMenu(false);
+            }
         });
 
         const obs = new IntersectionObserver(es => {
