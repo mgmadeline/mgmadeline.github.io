@@ -116,7 +116,9 @@
         .header-contact {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 28px;
+            flex-wrap: wrap;
         }
 
         .header-contact .contact-link {
@@ -134,7 +136,7 @@
         .header-nav {
             border-top: 1px solid rgba(0,0,0,0.05);
             padding: 0 var(--pad);
-            overflow-x: auto;
+            overflow-x: visible;
             scrollbar-width: none;
         }
 
@@ -144,8 +146,10 @@
         .header-nav ul {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+            row-gap: 2px;
             list-style: none;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         .header-nav a {
@@ -159,6 +163,7 @@
             text-decoration: none;
             position: relative;
             transition: color 0.3s;
+            white-space: nowrap;
         }
 
         .header-nav li:first-child a { padding-left: 0; }
@@ -605,9 +610,34 @@
             .featured-text h2 { font-size: 2rem; }
         }
 
-        @media (max-width: 768px) {
-            :root { --pad: 28px; --section-gap: 48px; }
+        @media (max-width: 1180px) {
+            .header-top {
+                flex-wrap: wrap;
+                align-items: flex-start;
+                gap: 12px 20px;
+            }
 
+            .header-logo {
+                flex: 1 1 260px;
+            }
+
+            .header-contact {
+                flex: 1 1 320px;
+                gap: 10px 18px;
+            }
+
+            .header-contact .contact-link {
+                font-size: 0.82rem;
+            }
+
+            .header-nav a {
+                padding: 12px 16px;
+                font-size: 0.7rem;
+                letter-spacing: 0.12em;
+            }
+        }
+
+        @media (max-width: 960px) {
             .hamburger { display: flex; }
             .header-contact, .header-nav { display: none; }
 
@@ -654,10 +684,20 @@
             .header-nav.open .mobile-contact .contact-link {
                 color: var(--text-primary) !important;
                 font-size: 0.8rem;
+                align-items: center;
+                gap: 10px;
+                line-height: 1.2;
             }
 
             .header-nav.open .mobile-contact .contact-link::after { display: none; }
-            .header-nav.open .mobile-contact .c-icon { filter: none; }
+            .header-nav.open .mobile-contact .c-icon {
+                filter: none;
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root { --pad: 28px; --section-gap: 48px; }
 
             .hero-info {
                 bottom: 24px; left: 16px; right: 16px;
@@ -893,11 +933,16 @@
 
         const menuBtn = document.getElementById('hamburger');
         const menuNav = document.getElementById('headerNav');
+        const mobileMenuBreakpoint = 960;
+
+        function isMobileMenuViewport() {
+            return window.innerWidth <= mobileMenuBreakpoint;
+        }
 
         function setMobileMenu(open) {
             menuNav.classList.toggle('open', open);
             hdr.classList.toggle('menu-open', open);
-            document.body.classList.toggle('menu-open', open && window.innerWidth <= 768);
+            document.body.classList.toggle('menu-open', open && isMobileMenuViewport());
             menuBtn.setAttribute('aria-expanded', String(open));
             menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         }
@@ -917,13 +962,13 @@
         });
 
         document.addEventListener('click', e => {
-            if (!menuNav.classList.contains('open') || window.innerWidth > 768) return;
+            if (!menuNav.classList.contains('open') || !isMobileMenuViewport()) return;
             if (menuNav.contains(e.target) || menuBtn.contains(e.target)) return;
             setMobileMenu(false);
         });
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && menuNav.classList.contains('open')) {
+            if (!isMobileMenuViewport() && menuNav.classList.contains('open')) {
                 setMobileMenu(false);
             }
         });
