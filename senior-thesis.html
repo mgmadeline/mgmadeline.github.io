@@ -255,19 +255,10 @@
         .ph-silver { background: linear-gradient(150deg, #e4d2d5 0%, #dbbabf 50%, #d4aeb3 100%); }
         .ph-light { background: linear-gradient(150deg, #ebe5e0 0%, #e0d6d0 50%, #d8cdc6 100%); }
 
-        .ph-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            z-index: 1;
-            color: rgba(61,46,46,0.18);
-            position: absolute;
-        }
-
         /* ========== PROJECT HERO BANNER ========== */
         .project-hero {
-            padding-top: 180px;
-            padding-bottom: 72px;
+            padding-top: 160px;
+            padding-bottom: 0;
             background: var(--blush-whisper);
             border-bottom: 1px solid var(--blush-mist);
             text-align: center;
@@ -276,7 +267,16 @@
         .project-hero-inner {
             max-width: var(--max-w);
             margin: 0 auto;
-            padding: 0 var(--pad);
+            padding: 0 var(--pad) 48px;
+        }
+
+        .project-hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.4rem;
+            font-weight: 300;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 10px;
         }
 
         .project-tag {
@@ -286,39 +286,76 @@
             letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--gold-fusion);
-            margin-bottom: 18px;
-        }
-
-        .project-hero h1 {
-            font-family: var(--font-display);
-            font-size: 3.4rem;
-            font-weight: 300;
-            color: var(--text-primary);
-            line-height: 1.15;
         }
 
         /* ========== PROJECT SUMMARY ========== */
         .project-summary {
             max-width: 780px;
             margin: 0 auto;
-            padding: var(--section-gap) var(--pad);
+            padding: 18px var(--pad) 0;
             text-align: center;
         }
 
         .project-summary p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 300;
             color: var(--text-body);
-            line-height: 1.85;
-            margin-bottom: 16px;
+            line-height: 1.8;
+            margin-bottom: 14px;
         }
 
         .project-summary p:last-child {
             margin-bottom: 0;
         }
 
+        /* ========== VIEW TOGGLE ========== */
+        .view-toggle {
+            display: flex;
+            gap: 24px;
+            justify-content: flex-end;
+            padding: 36px 0 24px;
+        }
+
+        .view-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-body);
+            cursor: pointer;
+            padding: 6px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .view-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: var(--china-rose);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .view-btn.active {
+            color: var(--china-rose);
+        }
+
+        .view-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        .view-btn:hover {
+            color: var(--china-rose);
+        }
+
         /* ========== PROJECT SLIDESHOW ========== */
-        .project-slideshow-wrap {
+        .project-display-wrap {
             padding-bottom: var(--section-gap);
         }
 
@@ -348,6 +385,13 @@
         .project-slide.active {
             opacity: 1;
             z-index: 1;
+        }
+
+        .project-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .project-nav {
@@ -399,6 +443,52 @@
 
         .project-arrow + .project-arrow {
             margin-left: -1px;
+        }
+
+        /* ========== PROJECT GALLERY ========== */
+        .project-gallery {
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        .gallery-hero {
+            width: 100%;
+            margin-bottom: 24px;
+            border: 1px solid var(--blush-mist);
+            overflow: hidden;
+            background: var(--blush-whisper);
+        }
+
+        .gallery-hero img {
+            width: 100%;
+            display: block;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .gallery-item {
+            border: 1px solid var(--blush-mist);
+            overflow: hidden;
+            background: var(--blush-whisper);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            display: block;
+        }
+
+        /* ========== EMPTY STATE ========== */
+        .project-empty {
+            text-align: center;
+            padding: 80px 0;
+            color: var(--text-body);
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.04em;
         }
 
         /* ========== PROJECT NAVIGATION (prev/next) ========== */
@@ -631,8 +721,11 @@
             :root { --pad: 28px; --section-gap: 48px; }
 
             .project-hero {
-                padding-top: 130px;
-                padding-bottom: 48px;
+                padding-top: 120px;
+            }
+
+            .project-hero-inner {
+                padding-bottom: 32px;
             }
 
             .project-hero h1 {
@@ -640,7 +733,7 @@
             }
 
             .project-summary {
-                padding: 40px var(--pad);
+                padding-top: 14px;
             }
 
             .project-slide-container {
@@ -657,6 +750,15 @@
             .project-arrow {
                 width: 38px;
                 height: 38px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .gallery-hero {
+                margin-bottom: 16px;
             }
 
             .project-pager {
@@ -730,12 +832,12 @@
     <!-- PROJECT HERO BANNER -->
     <section class="project-hero">
         <div class="project-hero-inner">
-            <span class="project-tag">Collection</span>
             <h1>Senior Thesis Collection</h1>
+            <span class="project-tag">Collection</span>
         </div>
     </section>
 
-    <!-- PROJECT CONTENT -->
+    <!-- PROJECT SUMMARY -->
     <div class="content-wrap">
         <div class="project-summary reveal">
             <p>A culminating body of work exploring garment construction, concept development, and the emergence of a personal design voice.</p>
@@ -743,26 +845,32 @@
         </div>
     </div>
 
-    <div class="content-wrap project-slideshow-wrap">
-        <div class="project-slideshow reveal" id="projectSS">
-            <div class="project-slide-container">
-                <div class="project-slide active"><div class="ph ph-blush"><img src="images/senior-thesis/01.jpg" alt="Senior Thesis — Image 1" onerror="this.style.display='none'"><span class="ph-label">Image 1</span></div></div>
-                <div class="project-slide"><div class="ph ph-silver"><img src="images/senior-thesis/02.jpg" alt="Senior Thesis — Image 2" onerror="this.style.display='none'"><span class="ph-label">Image 2</span></div></div>
-                <div class="project-slide"><div class="ph ph-blush"><img src="images/senior-thesis/03.jpg" alt="Senior Thesis — Image 3" onerror="this.style.display='none'"><span class="ph-label">Image 3</span></div></div>
-                <div class="project-slide"><div class="ph ph-silver"><img src="images/senior-thesis/04.jpg" alt="Senior Thesis — Image 4" onerror="this.style.display='none'"><span class="ph-label">Image 4</span></div></div>
-                <div class="project-slide"><div class="ph ph-blush"><img src="images/senior-thesis/05.jpg" alt="Senior Thesis — Image 5" onerror="this.style.display='none'"><span class="ph-label">Image 5</span></div></div>
-                <div class="project-slide"><div class="ph ph-silver"><img src="images/senior-thesis/06.jpg" alt="Senior Thesis — Image 6" onerror="this.style.display='none'"><span class="ph-label">Image 6</span></div></div>
-            </div>
+    <!-- VIEW TOGGLE + SLIDESHOW / GALLERY -->
+    <div class="content-wrap project-display-wrap">
+        <div class="view-toggle" id="viewToggle" style="display:none">
+            <button class="view-btn active" data-view="slideshow">Slideshow</button>
+            <button class="view-btn" data-view="gallery">Gallery</button>
+        </div>
+
+        <div class="project-slideshow" id="projectSS" style="display:none">
+            <div class="project-slide-container" id="slideContainer"></div>
             <div class="project-nav">
-                <span class="project-counter" id="projectCounter">01 / 06</span>
+                <span class="project-counter" id="projectCounter"></span>
                 <div class="project-arrows">
                     <button class="project-arrow" id="projectPrev" aria-label="Previous slide">&#8592;</button>
                     <button class="project-arrow" id="projectNext" aria-label="Next slide">&#8594;</button>
                 </div>
             </div>
         </div>
+
+        <div class="project-gallery" id="projectGallery" style="display:none"></div>
+
+        <div class="project-empty" id="projectEmpty" style="display:none">
+            <p>Images coming soon.</p>
+        </div>
     </div>
 
+    <!-- PROJECT PAGER -->
     <div class="content-wrap">
         <div class="project-pager">
             <div class="pager-left">
@@ -794,38 +902,192 @@
     </footer>
 
     <script>
-        /* Slideshow */
-        function slideshow(slides, counterEl) {
-            let i = 0;
-            const n = slides.length;
+        /* ============================================================
+           CONFIG — change these per project page
+           ============================================================ */
+        var IMAGE_FOLDER = 'images/senior-thesis/';
+        var PROJECT_TITLE = 'Senior Thesis';
+        var EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp'];
+
+        /* ============================================================
+           IMAGE DISCOVERY — probes sequential filenames until none found
+           ============================================================ */
+        function probeNumber(num) {
+            return new Promise(function(resolve) {
+                var resolved = false;
+                var failed = 0;
+                var padded = String(num).padStart(2, '0');
+                var candidates = [];
+
+                EXTENSIONS.forEach(function(ext) {
+                    candidates.push(IMAGE_FOLDER + padded + '.' + ext);
+                    if (padded !== String(num)) {
+                        candidates.push(IMAGE_FOLDER + num + '.' + ext);
+                    }
+                });
+
+                var total = candidates.length;
+
+                candidates.forEach(function(src) {
+                    var img = new Image();
+                    img.onload = function() {
+                        if (!resolved) { resolved = true; resolve(src); }
+                    };
+                    img.onerror = function() {
+                        failed++;
+                        if (failed >= total && !resolved) resolve(null);
+                    };
+                    img.src = src;
+                });
+            });
+        }
+
+        async function discoverImages() {
+            var images = [];
+            var num = 1;
+            while (num <= 200) {
+                var src = await probeNumber(num);
+                if (!src) break;
+                images.push(src);
+                num++;
+            }
+            return images;
+        }
+
+        /* ============================================================
+           SLIDESHOW
+           ============================================================ */
+        var slideshowCtrl = null;
+
+        function buildSlideshow(images) {
+            var container = document.getElementById('slideContainer');
+            var counterEl = document.getElementById('projectCounter');
+            container.innerHTML = '';
+
+            images.forEach(function(src, idx) {
+                var slide = document.createElement('div');
+                slide.className = 'project-slide' + (idx === 0 ? ' active' : '');
+                var img = document.createElement('img');
+                img.src = src;
+                img.alt = PROJECT_TITLE + ' — Image ' + (idx + 1);
+                slide.appendChild(img);
+                container.appendChild(slide);
+            });
+
+            var slides = container.querySelectorAll('.project-slide');
+            var n = slides.length;
+            var i = 0;
+
             function go(to) {
                 i = ((to % n) + n) % n;
                 slides.forEach(function(s) { s.classList.remove('active'); });
                 slides[i].classList.add('active');
-                if (counterEl) counterEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
+                counterEl.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
             }
-            return { next: function() { go(i + 1); }, prev: function() { go(i - 1); } };
+
+            go(0);
+            slideshowCtrl = { next: function() { go(i + 1); }, prev: function() { go(i - 1); } };
         }
 
-        var projSlides = document.querySelectorAll('.project-slide');
-        var projCounter = document.getElementById('projectCounter');
-        var proj = slideshow(projSlides, projCounter);
-        document.getElementById('projectNext').addEventListener('click', proj.next);
-        document.getElementById('projectPrev').addEventListener('click', proj.prev);
+        /* ============================================================
+           GALLERY
+           ============================================================ */
+        function buildGallery(images) {
+            var gallery = document.getElementById('projectGallery');
+            gallery.innerHTML = '';
 
-        /* Keyboard navigation */
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight') proj.next();
-            if (e.key === 'ArrowLeft') proj.prev();
+            if (images.length > 0) {
+                var hero = document.createElement('div');
+                hero.className = 'gallery-hero';
+                var heroImg = document.createElement('img');
+                heroImg.src = images[0];
+                heroImg.alt = PROJECT_TITLE + ' — Image 1';
+                hero.appendChild(heroImg);
+                gallery.appendChild(hero);
+            }
+
+            if (images.length > 1) {
+                var grid = document.createElement('div');
+                grid.className = 'gallery-grid';
+
+                for (var idx = 1; idx < images.length; idx++) {
+                    var item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    var img = document.createElement('img');
+                    img.src = images[idx];
+                    img.alt = PROJECT_TITLE + ' — Image ' + (idx + 1);
+                    item.appendChild(img);
+                    grid.appendChild(item);
+                }
+
+                gallery.appendChild(grid);
+            }
+        }
+
+        /* ============================================================
+           VIEW TOGGLE
+           ============================================================ */
+        function setupToggle() {
+            var toggle = document.getElementById('viewToggle');
+            var ssEl = document.getElementById('projectSS');
+            var galEl = document.getElementById('projectGallery');
+            var btns = toggle.querySelectorAll('.view-btn');
+
+            btns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var view = btn.getAttribute('data-view');
+                    btns.forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+
+                    if (view === 'slideshow') {
+                        ssEl.style.display = '';
+                        galEl.style.display = 'none';
+                    } else {
+                        ssEl.style.display = 'none';
+                        galEl.style.display = '';
+                    }
+                });
+            });
+        }
+
+        /* ============================================================
+           INIT — discover images, then build both views
+           ============================================================ */
+        discoverImages().then(function(images) {
+            if (images.length === 0) {
+                document.getElementById('projectEmpty').style.display = '';
+                return;
+            }
+
+            document.getElementById('viewToggle').style.display = '';
+            document.getElementById('projectSS').style.display = '';
+
+            buildSlideshow(images);
+            buildGallery(images);
+            setupToggle();
+
+            document.getElementById('projectNext').addEventListener('click', function() { slideshowCtrl.next(); });
+            document.getElementById('projectPrev').addEventListener('click', function() { slideshowCtrl.prev(); });
+
+            document.addEventListener('keydown', function(e) {
+                if (document.getElementById('projectSS').style.display !== 'none') {
+                    if (e.key === 'ArrowRight') slideshowCtrl.next();
+                    if (e.key === 'ArrowLeft') slideshowCtrl.prev();
+                }
+            });
         });
 
-        /* Header — always scrolled on project pages */
+        /* ============================================================
+           HEADER — always scrolled on project pages
+           ============================================================ */
         var hdr = document.getElementById('siteHeader');
         window.addEventListener('scroll', function() {
             hdr.classList.add('scrolled');
         }, { passive: true });
 
-        /* Hamburger menu */
+        /* ============================================================
+           HAMBURGER MENU
+           ============================================================ */
         var menuBtn = document.getElementById('hamburger');
         var menuNav = document.getElementById('headerNav');
         var mobileMenuBreakpoint = 680;
@@ -868,7 +1130,9 @@
             }
         });
 
-        /* Reveal on scroll */
+        /* ============================================================
+           REVEAL ON SCROLL
+           ============================================================ */
         var obs = new IntersectionObserver(function(es) {
             es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
