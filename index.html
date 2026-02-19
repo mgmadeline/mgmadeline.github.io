@@ -929,12 +929,43 @@
         </div>
     </footer>
 
-    <script src="images/manifest.js"></script>
     <script>
         (function() {
-            const manifest = window.IMAGE_MANIFEST || { hero: [], featured: [], cards: [] };
+            var EXTS = ['png', 'jpg', 'jpeg', 'webp'];
 
-            const heroData = [
+            function probePrefix(folder, num) {
+                return new Promise(function(resolve) {
+                    var remaining = EXTS.length;
+                    var found = false;
+                    EXTS.forEach(function(ext) {
+                        var src = folder + '/' + num + '.' + ext;
+                        var img = new Image();
+                        img.onload = function() {
+                            if (!found) { found = true; resolve(src); }
+                        };
+                        img.onerror = function() {
+                            remaining--;
+                            if (remaining === 0 && !found) resolve(null);
+                        };
+                        img.src = src;
+                    });
+                });
+            }
+
+            function probeFolder(folder) {
+                var results = [];
+                function next(i) {
+                    var num = String(i).padStart(2, '0');
+                    return probePrefix(folder, num).then(function(src) {
+                        if (!src) return results;
+                        results.push(src);
+                        return next(i + 1);
+                    });
+                }
+                return next(1);
+            }
+
+            var heroData = [
                 { title: 'Senior Thesis Collection', desc: 'A culminating body of work exploring garment construction, concept development, and personal design voice.', link: 'senior-thesis.html' },
                 { title: 'Shoe & Handbag Designs', desc: 'Accessory design explorations spanning footwear and handbags, from sketch to refined presentation.', link: 'shoe-handbag.html' },
                 { title: 'FSF Case Study', desc: 'Fashion Scholarship Fund case study addressing post-COVID consumer needs through innovative collection design.', link: 'fsf-case-study.html' },
@@ -943,84 +974,97 @@
                 { title: 'Renaissance Romance', desc: 'Romantic silhouettes and historical references reinterpreted through a modern design lens.', link: 'renaissance-romance.html' }
             ];
 
-            const featBgClasses = ['ph-blush', 'ph-silver'];
+            var featBgClasses = ['ph-blush', 'ph-silver'];
 
-            // --- Build hero slides from manifest ---
-            const heroSection = document.getElementById('hero');
-            const heroInfo = document.getElementById('heroInfo');
-            manifest.hero.forEach((filename, i) => {
-                const slide = document.createElement('div');
-                slide.className = 'hero-slide' + (i === 0 ? ' active' : '');
-                const alt = heroData[i] ? heroData[i].title : '';
-                slide.innerHTML =
-                    '<div class="ph ph-hero"><img src="images/hero/' + filename + '" alt="' + alt + '"></div>' +
-                    '<div class="hero-overlay"></div>';
-                heroSection.insertBefore(slide, heroInfo);
+            Promise.all([
+                probeFolder('images/hero'),
+                probeFolder('images/featured'),
+                probeFolder('images/cards')
+            ]).then(function(results) {
+                var heroImages = results[0];
+                var featImages = results[1];
+                var cardImages = results[2];
+
+                var heroSection = document.getElementById('hero');
+                var heroInfo = document.getElementById('heroInfo');
+                heroImages.forEach(function(src, i) {
+                    var slide = document.createElement('div');
+                    slide.className = 'hero-slide' + (i === 0 ? ' active' : '');
+                    var alt = heroData[i] ? heroData[i].title : '';
+                    slide.innerHTML =
+                        '<div class="ph ph-hero"><img src="' + src + '" alt="' + alt + '"></div>' +
+                        '<div class="hero-overlay"></div>';
+                    heroSection.insertBefore(slide, heroInfo);
+                });
+
+                var featSS = document.getElementById('featSS');
+                var featNav = featSS.querySelector('.feat-nav');
+                featImages.forEach(function(src, i) {
+                    var slide = document.createElement('div');
+                    slide.className = 'feat-slide' + (i === 0 ? ' active' : '');
+                    slide.innerHTML =
+                        '<div class="ph ' + featBgClasses[i % featBgClasses.length] + '">' +
+                        '<img src="' + src + '" alt="Featured — Image ' + (i + 1) + '">' +
+                        '</div>';
+                    featSS.insertBefore(slide, featNav);
+                });
+
+                var cardImgs = document.querySelectorAll('.work-card img');
+                cardImages.forEach(function(src, i) {
+                    if (cardImgs[i]) cardImgs[i].src = src;
+                });
+
+                initSlideshows(heroImages.length, featImages.length);
             });
 
-            // --- Build featured slides from manifest ---
-            const featSS = document.getElementById('featSS');
-            const featNav = featSS.querySelector('.feat-nav');
-            manifest.featured.forEach((filename, i) => {
-                const slide = document.createElement('div');
-                slide.className = 'feat-slide' + (i === 0 ? ' active' : '');
-                slide.innerHTML =
-                    '<div class="ph ' + featBgClasses[i % featBgClasses.length] + '">' +
-                    '<img src="images/featured/' + filename + '" alt="Senior Thesis — Image ' + (i + 1) + '">' +
-                    '</div>';
-                featSS.insertBefore(slide, featNav);
-            });
-
-            // --- Set card images from manifest ---
-            const cardImgs = document.querySelectorAll('.work-card img');
-            manifest.cards.forEach((filename, i) => {
-                if (cardImgs[i]) cardImgs[i].src = 'images/cards/' + filename;
-            });
-
-            // --- Slideshow helper ---
-            function slideshow(slides, counterEl, opts) {
-                opts = opts || {};
-                let i = 0;
-                const n = slides.length;
-                function go(to) {
-                    i = ((to % n) + n) % n;
-                    slides.forEach(s => s.classList.remove('active'));
-                    slides[i].classList.add('active');
-                    if (counterEl) counterEl.textContent = String(i+1).padStart(2,'0') + ' / ' + String(n).padStart(2,'0');
-                    if (opts.onUpdate) opts.onUpdate(i);
+            function initSlideshows(heroCount, featCount) {
+                function slideshow(slides, counterEl, opts) {
+                    opts = opts || {};
+                    var i = 0;
+                    var n = slides.length;
+                    function go(to) {
+                        i = ((to % n) + n) % n;
+                        slides.forEach(function(s) { s.classList.remove('active'); });
+                        slides[i].classList.add('active');
+                        if (counterEl) counterEl.textContent = String(i+1).padStart(2,'0') + ' / ' + String(n).padStart(2,'0');
+                        if (opts.onUpdate) opts.onUpdate(i);
+                    }
+                    return { next: function() { go(i+1); }, prev: function() { go(i-1); } };
                 }
-                return { next: () => go(i+1), prev: () => go(i-1) };
+
+                var tEl = document.getElementById('heroTitle');
+                var dEl = document.getElementById('heroDesc');
+                var lEl = document.getElementById('heroLink');
+                var hero = slideshow(
+                    Array.from(document.querySelectorAll('.hero-slide')),
+                    document.getElementById('heroCounter'),
+                    { onUpdate: function(i) { tEl.textContent = heroData[i].title; dEl.textContent = heroData[i].desc; lEl.href = heroData[i].link; } }
+                );
+
+                document.getElementById('heroNext').addEventListener('click', hero.next);
+                document.getElementById('heroPrev').addEventListener('click', hero.prev);
+
+                var auto = setInterval(hero.next, 6000);
+                var hi = document.getElementById('heroInfo');
+                hi.addEventListener('mouseenter', function() { clearInterval(auto); });
+                hi.addEventListener('mouseleave', function() { auto = setInterval(hero.next, 6000); });
+
+                var feat = slideshow(
+                    Array.from(document.querySelectorAll('.feat-slide')),
+                    document.getElementById('featCounter')
+                );
+                document.getElementById('featNext').addEventListener('click', feat.next);
+                document.getElementById('featPrev').addEventListener('click', feat.prev);
             }
 
-            // --- Hero slideshow ---
-            const tEl = document.getElementById('heroTitle'), dEl = document.getElementById('heroDesc'), lEl = document.getElementById('heroLink');
-            const hero = slideshow(document.querySelectorAll('.hero-slide'), document.getElementById('heroCounter'), {
-                onUpdate: i => { tEl.textContent = heroData[i].title; dEl.textContent = heroData[i].desc; lEl.href = heroData[i].link; }
-            });
-
-            document.getElementById('heroNext').addEventListener('click', hero.next);
-            document.getElementById('heroPrev').addEventListener('click', hero.prev);
-
-            let auto = setInterval(hero.next, 6000);
-            const hi = document.getElementById('heroInfo');
-            hi.addEventListener('mouseenter', () => clearInterval(auto));
-            hi.addEventListener('mouseleave', () => { auto = setInterval(hero.next, 6000); });
-
-            // --- Featured slideshow ---
-            const feat = slideshow(document.querySelectorAll('.feat-slide'), document.getElementById('featCounter'));
-            document.getElementById('featNext').addEventListener('click', feat.next);
-            document.getElementById('featPrev').addEventListener('click', feat.prev);
-
-            // --- Scroll header ---
-            const hdr = document.getElementById('siteHeader');
-            window.addEventListener('scroll', () => {
+            var hdr = document.getElementById('siteHeader');
+            window.addEventListener('scroll', function() {
                 hdr.classList.toggle('scrolled', window.scrollY > 80);
             }, { passive: true });
 
-            // --- Mobile menu ---
-            const menuBtn = document.getElementById('hamburger');
-            const menuNav = document.getElementById('headerNav');
-            const mobileMenuBreakpoint = 680;
+            var menuBtn = document.getElementById('hamburger');
+            var menuNav = document.getElementById('headerNav');
+            var mobileMenuBreakpoint = 680;
 
             function isMobileMenuViewport() {
                 return window.innerWidth <= mobileMenuBreakpoint;
@@ -1034,37 +1078,36 @@
                 menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
             }
 
-            menuBtn.addEventListener('click', () => {
+            menuBtn.addEventListener('click', function() {
                 setMobileMenu(!menuNav.classList.contains('open'));
             });
 
-            menuNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => setMobileMenu(false));
+            menuNav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() { setMobileMenu(false); });
             });
 
-            document.addEventListener('keydown', e => {
+            document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && menuNav.classList.contains('open')) {
                     setMobileMenu(false);
                 }
             });
 
-            document.addEventListener('click', e => {
+            document.addEventListener('click', function(e) {
                 if (!menuNav.classList.contains('open') || !isMobileMenuViewport()) return;
                 if (menuNav.contains(e.target) || menuBtn.contains(e.target)) return;
                 setMobileMenu(false);
             });
 
-            window.addEventListener('resize', () => {
+            window.addEventListener('resize', function() {
                 if (!isMobileMenuViewport() && menuNav.classList.contains('open')) {
                     setMobileMenu(false);
                 }
             });
 
-            // --- Reveal on scroll ---
-            const obs = new IntersectionObserver(es => {
-                es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            var obs = new IntersectionObserver(function(es) {
+                es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+            document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
         })();
     </script>
 </body>
