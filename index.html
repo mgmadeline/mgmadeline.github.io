@@ -53,14 +53,8 @@
             position: fixed;
             top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: var(--blush-whisper);
             box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-        }
-
-        .site-header.menu-open {
-            background: rgba(255,255,255,0.98);
         }
 
         .header-top {
@@ -202,7 +196,7 @@
 
         /* ========== HERO CARD ========== */
         .hero {
-            padding-top: 140px;
+            padding-top: 180px;
             padding-bottom: var(--section-gap);
             background: var(--white);
         }
@@ -552,15 +546,6 @@
 
         .footer-contact .contact-link:hover { color: var(--china-rose); }
 
-        /* ========== REVEAL ========== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-        }
-
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
         /* ========== RESPONSIVE ========== */
 
         /* --- 3-column nav grid --- */
@@ -750,8 +735,9 @@
 
             .footer-contact {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: flex-end;
                 gap: 10px;
+                align-self: flex-end;
             }
         }
     </style>
@@ -828,7 +814,7 @@
 
     <!-- FEATURED -->
     <div class="content-wrap featured-wrap" id="featuredSection">
-        <div class="featured reveal">
+        <div class="featured">
             <div class="featured-text">
                 <h2>Capstone Collection</h2>
                 <p>A culminating body of work exploring garment construction, concept development, and the emergence of a personal design voice.</p>
@@ -850,7 +836,7 @@
     <!-- WORKS -->
     <div class="content-wrap works-wrap">
         <div class="works-grid">
-            <a href="shoe-handbag.html" class="work-card reveal">
+            <a href="shoe-handbag.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-light"><img src="images/cards/01_Website_Title_Pgs_SS2_Expression.png" alt="Shoe &amp; Handbag Designs"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Accessories</div>
@@ -859,7 +845,7 @@
                     <span class="work-view">View Project &rarr;</span>
                 </div>
             </a>
-            <a href="fsf-case-study.html" class="work-card reveal">
+            <a href="fsf-case-study.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-blush"><img src="images/cards/02_Website_Title_Pgs_SS1_RTR_X_Stitched_Up.png" alt="Fashion Scholarship Fund"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Case Study</div>
@@ -868,7 +854,7 @@
                     <span class="work-view">View Project &rarr;</span>
                 </div>
             </a>
-            <a href="stitched-up.html" class="work-card reveal">
+            <a href="stitched-up.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-silver"><img src="images/cards/03_Website_Title_Pgs_SS5_Stitched_Up.png" alt="Stitched Up"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Project</div>
@@ -877,7 +863,7 @@
                     <span class="work-view">View Project &rarr;</span>
                 </div>
             </a>
-            <a href="strange-beauty.html" class="work-card reveal">
+            <a href="strange-beauty.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-light"><img src="images/cards/04_Website_Title_Pgs_SS4_Strange_Beauty.png" alt="Strange Beauty"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Collection</div>
@@ -1003,10 +989,6 @@
             }
         });
 
-        const obs = new IntersectionObserver(es => {
-            es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
 </body>
 </html>
