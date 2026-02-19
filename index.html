@@ -26,7 +26,7 @@
             --text-on-pale: #4A3636;
             --text-accent: #6E0A2C;
 
-            --section-gap: 80px;
+            --section-gap: 100px;
             --pad: 56px;
             --max-w: 1400px;
 
@@ -203,7 +203,7 @@
         /* ========== HERO CARD ========== */
         .hero {
             padding-top: 140px;
-            padding-bottom: 0;
+            padding-bottom: var(--section-gap);
             background: var(--white);
         }
 
@@ -349,7 +349,7 @@
 
         /* ========== FEATURED ========== */
         .featured-wrap {
-            padding-top: var(--section-gap);
+            padding-bottom: var(--section-gap);
         }
 
         .featured {
@@ -465,7 +465,6 @@
 
         /* ========== WORKS ========== */
         .works-wrap {
-            padding-top: var(--section-gap);
             padding-bottom: var(--section-gap);
         }
 
@@ -622,7 +621,7 @@
         }
 
         @media (max-width: 1024px) {
-            :root { --pad: 42px; --section-gap: 56px; }
+            :root { --pad: 42px; --section-gap: 72px; }
             .featured { grid-template-columns: 1fr 2fr; min-height: 380px; }
             .featured-text { padding: 40px 34px; }
             .featured-text h2 { font-size: 2rem; }
@@ -731,7 +730,7 @@
         }
 
         @media (max-width: 768px) {
-            :root { --pad: 28px; --section-gap: 48px; }
+            :root { --pad: 28px; --section-gap: 56px; }
 
             .hero-card-info {
                 flex-direction: column;
