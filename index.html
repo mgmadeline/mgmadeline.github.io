@@ -131,8 +131,12 @@
             white-space: nowrap;
         }
 
+        .header-nav li {
+            width: fit-content;
+        }
+
         .header-nav a {
-            display: block;
+            display: table;
             padding: 15px 20px;
             font-size: 0.75rem;
             font-weight: 500;
@@ -147,20 +151,21 @@
 
         .header-nav li:first-child a { padding-left: 0; }
 
-        .header-nav a::after {
+        .header-nav a span { position: relative; display: inline-block; }
+        .header-nav a span::after {
             content: '';
             position: absolute;
-            bottom: 9px; left: 18px; right: 18px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: 1px;
             background: var(--china-rose);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s var(--ease);
         }
-
-        .header-nav li:first-child a::after { left: 0; }
-        .header-nav a:hover::after { transform: scaleX(1); }
         .header-nav a:hover { color: var(--china-rose); }
+        .header-nav a:hover span::after { transform: scaleX(1); }
 
         .hamburger {
             display: none;
@@ -348,7 +353,9 @@
 
         .featured {
             display: grid;
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 2fr 3fr;
+            grid-template-rows: auto;
+            align-items: start;
             background: var(--blush-whisper);
             border: 1px solid var(--blush-mist);
             max-width: var(--max-w);
@@ -361,6 +368,7 @@
             justify-content: center;
             padding: 48px 44px;
             border-right: 1px solid var(--blush-mist);
+            overflow: visible;
         }
 
         .featured-text h2 {
@@ -400,7 +408,10 @@
         .feat-ss {
             position: relative;
             overflow: hidden;
+            width: 100%;
             aspect-ratio: 17/11;
+            max-height: min(65vh, 520px);
+            min-height: 280px;
         }
 
         .feat-slide {
@@ -408,6 +419,19 @@
             opacity: 0;
             z-index: 0;
             transition: opacity 0.8s var(--ease);
+        }
+
+        .feat-slide .ph {
+            width: 100%;
+            height: 100%;
+        }
+
+        .feat-slide .ph img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .feat-slide.active { opacity: 1; z-index: 1; }
@@ -511,6 +535,8 @@
 
         .work-card:hover .work-view { color: var(--china-rose); }
 
+        .title-no-wrap { white-space: nowrap; }
+
         /* ========== FOOTER ========== */
         .site-footer {
             background: var(--pale-silver);
@@ -523,6 +549,10 @@
             justify-content: space-between;
         }
 
+        .footer-message {
+            max-width: 480px;
+            text-align: left;
+        }
         .footer-message p {
             font-family: var(--font-display);
             font-size: 1.25rem;
@@ -530,7 +560,7 @@
             font-style: italic;
             color: var(--text-primary);
             line-height: 1.5;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         .footer-contact {
@@ -548,7 +578,6 @@
 
         /* ========== RESPONSIVE ========== */
 
-        /* --- 3-column nav grid --- */
         @media (max-width: 1400px) {
             .header-top {
                 gap: 12px 20px;
@@ -561,30 +590,6 @@
             .header-contact .contact-link {
                 font-size: 0.82rem;
             }
-
-            .header-nav ul {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                column-gap: 22px;
-                row-gap: 2px;
-                white-space: normal;
-            }
-
-            .header-nav li {
-                min-width: 0;
-            }
-
-            .header-nav a {
-                padding: 12px 0;
-                font-size: 0.7rem;
-                letter-spacing: 0.12em;
-                white-space: normal;
-            }
-
-            .header-nav a::after {
-                left: 0;
-                right: 0;
-            }
         }
 
         @media (max-width: 1024px) {
@@ -592,10 +597,11 @@
             .featured { grid-template-columns: 1fr 2fr; }
             .featured-text { padding: 40px 34px; }
             .featured-text h2 { font-size: 2rem; }
+            .feat-ss { max-height: min(55vh, 420px); min-height: 240px; }
         }
 
-        /* --- 2-column nav grid --- */
-        @media (max-width: 1040px) {
+        /* --- Hamburger menu (no 2-column layout; single row until this breakpoint) --- */
+        @media (max-width: 1200px) {
             .header-contact {
                 gap: 8px 12px;
             }
@@ -604,29 +610,13 @@
                 font-size: 0.76rem;
             }
 
-            .header-nav ul {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                column-gap: 16px;
-            }
-
-            .header-nav a {
-                font-size: 0.68rem;
-            }
-        }
-
-        /* Hide contact from top bar when 2-col grid is tight */
-        @media (max-width: 860px) {
-            .header-contact {
-                display: none;
-            }
-
             .header-top {
                 padding: 18px var(--pad);
             }
-        }
 
-        /* --- Hamburger menu --- */
-        @media (max-width: 680px) {
+            .header-contact {
+                display: none;
+            }
             .hamburger { display: flex; }
             .header-contact, .header-nav { display: none; }
 
@@ -661,7 +651,7 @@
                 color: var(--text-primary) !important;
             }
 
-            .header-nav.open a::after {
+            .header-nav.open a span::after {
                 display: none;
             }
 
@@ -722,18 +712,21 @@
                 border-bottom: 1px solid var(--blush-mist);
             }
 
+            .feat-ss {
+                max-height: min(50vh, 380px);
+                min-height: 220px;
+            }
+
             .works-grid { grid-template-columns: 1fr; }
 
             .site-footer { padding: 24px var(--pad); }
 
             .footer-inner {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
                 gap: 18px;
-                text-align: center;
+                text-align: left;
             }
-
-            .footer-message p { white-space: normal; }
 
             .footer-contact {
                 flex-direction: column;
@@ -763,12 +756,12 @@
         </div>
         <nav class="header-nav" id="headerNav">
             <ul>
-                <li><a href="senior-thesis.html">Capstone Collection</a></li>
-                <li><a href="shoe-handbag.html">Shoe &amp; Handbag Designs</a></li>
-                <li><a href="fsf-case-study.html">Fashion Scholarship Fund</a></li>
-                <li><a href="stitched-up.html">Stitched Up</a></li>
-                <li><a href="strange-beauty.html">Strange Beauty</a></li>
-                <li><a href="renaissance-romance.html">Renaissance Romance</a></li>
+                <li><a href="senior-thesis.html"><span>Capstone Collection</span></a></li>
+                <li><a href="shoe-handbag.html"><span>Shoe &amp; Handbag Designs</span></a></li>
+                <li><a href="fsf-case-study.html"><span>Fashion Scholarship Fund</span></a></li>
+                <li><a href="stitched-up.html"><span>Stitched Up</span></a></li>
+                <li><a href="strange-beauty.html"><span>Strange Beauty</span></a></li>
+                <li><a href="renaissance-romance.html"><span>Renaissance Romance</span></a></li>
             </ul>
             <div class="mobile-contact" style="display:none">
                 <a href="mailto:mccarthymadeline2@gmail.com" class="contact-link">
@@ -798,11 +791,11 @@
                 <div class="hero-card-info">
                     <div class="hero-card-text">
                         <div class="counter-text" id="heroCounter">01 / 06</div>
-                        <h2 id="heroTitle">Capstone Collection</h2>
-                        <p id="heroDesc">A culminating body of work exploring garment construction, concept development, and personal design voice.</p>
+                        <h2 id="heroTitle">Perspective</h2>
+                        <p id="heroDesc">A capstone collection investigating perception, movement, and distortion through experimental garment construction and a distinct, futuristic design voice.</p>
                     </div>
                     <div class="hero-card-bottom">
-                        <a href="senior-thesis.html" class="hero-link" id="heroLink">View Project &rarr;</a>
+                        <a href="senior-thesis.html" class="hero-link" id="heroLink">View Collection &rarr;</a>
                         <div class="arrow-row">
                             <button class="arrow-btn" id="heroPrev" aria-label="Previous">&#8592;</button>
                             <button class="arrow-btn" id="heroNext" aria-label="Next">&#8594;</button>
@@ -818,8 +811,7 @@
         <div class="featured">
             <div class="featured-text">
                 <h2>Capstone Collection</h2>
-                <p>A culminating body of work exploring garment construction, concept development, and the emergence of a personal design voice.</p>
-                <p>Each piece reflects a considered approach to silhouette, materiality, and narrative.</p>
+                <p>This case study explores how Rent the Runway responds to post-COVID consumer expectations by transforming excess inventory into exclusive, upcycled garments. The collection prioritizes sustainability and purpose-driven design, giving existing pieces a renewed life while reducing fashion waste.</p>
                 <a href="senior-thesis.html" class="featured-cta">View Collection &rarr;</a>
             </div>
             <div class="feat-ss" id="featSS">
@@ -841,27 +833,27 @@
                 <div class="work-card-image"><div class="ph ph-light"><img src="images/cards/01_Website_Title_Pgs_SS2_Expression.png" alt="Shoe &amp; Handbag Designs"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Accessories</div>
-                    <h3>Shoe &amp; Handbag Designs</h3>
-                    <p class="work-desc">Accessory design explorations spanning footwear and handbags, from sketch to refined presentation.</p>
-                    <span class="work-view">View Project &rarr;</span>
+                    <h3>Expression</h3>
+                    <p class="work-desc">Accessory design explorations in footwear and handbags, translating street expression and community spaces into refined, wearable art.</p>
+                    <span class="work-view">View Collection &rarr;</span>
                 </div>
             </a>
             <a href="fsf-case-study.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-blush"><img src="images/cards/02_Website_Title_Pgs_SS1_RTR_X_Stitched_Up.png" alt="Fashion Scholarship Fund"></div></div>
                 <div class="work-card-body">
                     <div class="work-card-tag">Case Study</div>
-                    <h3>Fashion Scholarship Fund</h3>
-                    <p class="work-desc">Fashion Scholarship Fund case study addressing post-COVID consumer needs through innovative collection design.</p>
-                    <span class="work-view">View Project &rarr;</span>
+                    <h3>Rent The Runway X Stitched Up</h3>
+                    <p class="work-desc">Case study addressing post-COVID consumer needs through innovative collection design, strategically using excess inventory to give old garments a new life.</p>
+                    <span class="work-view">View Collection &rarr;</span>
                 </div>
             </a>
             <a href="stitched-up.html" class="work-card">
                 <div class="work-card-image"><div class="ph ph-silver"><img src="images/cards/03_Website_Title_Pgs_SS5_Stitched_Up.png" alt="Stitched Up"></div></div>
                 <div class="work-card-body">
-                    <div class="work-card-tag">Project</div>
+                    <div class="work-card-tag">Collection</div>
                     <h3>Stitched Up</h3>
-                    <p class="work-desc">An exploration of textile manipulation, surface design, and garment construction techniques.</p>
-                    <span class="work-view">View Project &rarr;</span>
+                    <p class="work-desc">An exploration of textile manipulation and deconstructed garment construction through innovative upcycling.</p>
+                    <span class="work-view">View Collection &rarr;</span>
                 </div>
             </a>
             <a href="strange-beauty.html" class="work-card">
@@ -870,7 +862,7 @@
                     <div class="work-card-tag">Collection</div>
                     <h3>Strange Beauty</h3>
                     <p class="work-desc">A collection challenging conventional beauty standards through unconventional silhouettes and styling.</p>
-                    <span class="work-view">View Project &rarr;</span>
+                    <span class="work-view">View Collection &rarr;</span>
                 </div>
             </a>
         </div>
@@ -879,7 +871,7 @@
     <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-inner">
-            <div class="footer-message"><p>Thank you for visiting — let's connect.</p></div>
+            <div class="footer-message"><p>Thank you for viewing my work. I'm excited to connect, collaborate, and talk design.</p></div>
             <div class="footer-contact">
                 <a href="mailto:mccarthymadeline2@gmail.com" class="contact-link">
                     <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13L2 4"/></svg>
@@ -921,17 +913,25 @@
         }
 
         const heroData = [
-            { title: 'Capstone Collection', desc: 'A culminating body of work exploring garment construction, concept development, and personal design voice.', link: 'senior-thesis.html' },
-            { title: 'Shoe & Handbag Designs', desc: 'Accessory design explorations spanning footwear and handbags, from sketch to refined presentation.', link: 'shoe-handbag.html' },
-            { title: 'Fashion Scholarship Fund', desc: 'Fashion Scholarship Fund case study addressing post-COVID consumer needs through innovative collection design.', link: 'fsf-case-study.html' },
-            { title: 'Stitched Up', desc: 'An exploration of textile manipulation, surface design, and garment construction techniques.', link: 'stitched-up.html' },
+            { title: 'Perspective', desc: 'A capstone collection investigating perception, movement, and distortion through experimental garment construction and a distinct, futuristic design voice.', link: 'senior-thesis.html' },
+            { title: 'Expression', desc: 'Accessory design explorations in footwear and handbags, translating street expression and community spaces into refined, wearable art.', link: 'shoe-handbag.html' },
+            { title: 'Rent The Runway X Stitched Up', desc: 'Case study addressing post-COVID consumer needs through innovative collection design, strategically using excess inventory to give old garments a new life.', link: 'fsf-case-study.html' },
+            { title: 'Stitched Up', desc: 'Fall/Winter 2021. An exploration of textile manipulation and deconstructed garment construction through innovative upcycling.', link: 'stitched-up.html' },
             { title: 'Strange Beauty', desc: 'A collection challenging conventional beauty standards through unconventional silhouettes and styling.', link: 'strange-beauty.html' },
             { title: 'Renaissance Romance', desc: 'Romantic silhouettes and historical references reinterpreted through a modern design lens.', link: 'renaissance-romance.html' }
         ];
 
         const tEl = document.getElementById('heroTitle'), dEl = document.getElementById('heroDesc'), lEl = document.getElementById('heroLink');
         const hero = slideshow(document.querySelectorAll('.hero-slide'), document.getElementById('heroCounter'), {
-            onUpdate: i => { tEl.textContent = heroData[i].title; dEl.textContent = heroData[i].desc; lEl.href = heroData[i].link; }
+            onUpdate: i => {
+                dEl.textContent = heroData[i].desc;
+                lEl.href = heroData[i].link;
+                if (i === 2) {
+                    tEl.innerHTML = 'Rent The Runway X <span class="title-no-wrap">Stitched Up</span>';
+                } else {
+                    tEl.textContent = heroData[i].title;
+                }
+            }
         });
 
         document.getElementById('heroNext').addEventListener('click', hero.next);

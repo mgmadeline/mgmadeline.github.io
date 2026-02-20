@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Collection — Madeline McCarthy</title>
-    <meta name="description" content="Perspective — Fall/Winter 2022. This collection is anchored by a mirrored sculpture, exploring how shifting perspectives can distort form, shape, and perception.">
+    <title>Shoe &amp; Handbag Designs — Madeline McCarthy</title>
+    <meta name="description" content="Expression — Spring/Summer 2022. A designer-focused collection of one-of-a-kind accessories featuring 12 shoes and 12 bags rooted in contemporary graffiti.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -48,7 +48,6 @@
             overflow: hidden;
         }
 
-        /* ========== HEADER ========== */
         .site-header {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -64,9 +63,7 @@
             padding: 24px var(--pad);
         }
 
-        .header-logo {
-            flex-shrink: 0;
-        }
+        .header-logo { flex-shrink: 0; }
 
         .header-logo a {
             font-family: var(--font-display);
@@ -81,7 +78,6 @@
 
         .site-header.menu-open .header-logo a { color: var(--text-primary); }
 
-        /* Shared contact link style — header + footer */
         .contact-link {
             display: flex;
             align-items: center;
@@ -100,7 +96,6 @@
             flex-shrink: 0;
         }
 
-        /* Header contact colors */
         .header-contact {
             display: flex;
             align-items: center;
@@ -109,10 +104,7 @@
             flex-wrap: nowrap;
         }
 
-        .header-contact .contact-link {
-            color: var(--text-body);
-        }
-
+        .header-contact .contact-link { color: var(--text-body); }
         .header-contact .contact-link:hover { color: var(--china-rose); }
 
         .header-nav {
@@ -186,26 +178,16 @@
 
         .site-header.menu-open .hamburger span { background: var(--text-primary); }
 
-        .hamburger[aria-expanded="true"] span:nth-child(1) {
-            transform: translateY(6.5px) rotate(45deg);
-        }
+        .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+        .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-        .hamburger[aria-expanded="true"] span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger[aria-expanded="true"] span:nth-child(3) {
-            transform: translateY(-6.5px) rotate(-45deg);
-        }
-
-        /* ========== CONTENT WRAPPER ========== */
         .content-wrap {
             max-width: var(--max-w);
             margin: 0 auto;
             padding: 0 var(--pad);
         }
 
-        /* ========== PLACEHOLDERS ========== */
         .ph {
             width: 100%; height: 100%;
             display: flex;
@@ -226,7 +208,6 @@
         .ph-silver { background: linear-gradient(150deg, #e4d2d5 0%, #dbbabf 50%, #d4aeb3 100%); }
         .ph-light { background: linear-gradient(150deg, #ebe5e0 0%, #e0d6d0 50%, #d8cdc6 100%); }
 
-        /* ========== PROJECT HERO BANNER ========== */
         .project-hero {
             padding-top: 140px;
             text-align: center;
@@ -240,7 +221,6 @@
             text-align: center;
         }
 
-        /* ========== ORNAMENTAL DIVIDER ========== */
         .project-ornament {
             max-width: 780px;
             margin: 0 auto;
@@ -248,9 +228,7 @@
             padding: 28px 0 24px;
         }
 
-        .project-ornament svg {
-            display: inline-block;
-        }
+        .project-ornament svg { display: inline-block; }
 
         .project-hero h1 {
             font-family: var(--font-display);
@@ -271,7 +249,6 @@
             color: var(--gold-fusion);
         }
 
-        /* ========== PROJECT SUMMARY ========== */
         .project-summary {
             max-width: 780px;
             margin: 0 auto;
@@ -287,11 +264,8 @@
             margin-bottom: 14px;
         }
 
-        .project-summary p:last-child {
-            margin-bottom: 0;
-        }
+        .project-summary p:last-child { margin-bottom: 0; }
 
-        /* ========== VIEW TOGGLE + TOOLBAR ========== */
         .project-toolbar {
             display: flex;
             align-items: center;
@@ -337,9 +311,7 @@
             border-color: var(--pale-pink);
         }
 
-        .toolbar-arrow + .toolbar-arrow {
-            margin-left: -1px;
-        }
+        .toolbar-arrow + .toolbar-arrow { margin-left: -1px; }
 
         .view-toggle {
             display: flex;
@@ -372,19 +344,10 @@
             transition: transform 0.3s var(--ease);
         }
 
-        .view-btn.active {
-            color: var(--china-rose);
-        }
+        .view-btn.active { color: var(--china-rose); }
+        .view-btn.active::after { transform: scaleX(1); }
+        .view-btn:hover { color: var(--china-rose); }
 
-        .view-btn.active::after {
-            transform: scaleX(1);
-        }
-
-        .view-btn:hover {
-            color: var(--china-rose);
-        }
-
-        /* ========== PROJECT SLIDESHOW ========== */
         .project-display-wrap {
             padding-bottom: var(--section-gap);
         }
@@ -412,10 +375,7 @@
             transition: opacity 0.8s var(--ease);
         }
 
-        .project-slide.active {
-            opacity: 1;
-            z-index: 1;
-        }
+        .project-slide.active { opacity: 1; z-index: 1; }
 
         .project-slide img {
             width: 100%;
@@ -424,7 +384,6 @@
             display: block;
         }
 
-        /* ========== PROJECT GALLERY ========== */
         .project-gallery {
             max-width: var(--max-w);
             margin: 0 auto;
@@ -434,6 +393,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
+        }
+
+        .gallery-grid .gallery-item:first-child {
+            grid-column: 1 / -1;
         }
 
         .gallery-item {
@@ -447,7 +410,6 @@
             display: block;
         }
 
-        /* ========== PROJECT NAVIGATION (prev/next) ========== */
         .project-pager {
             display: flex;
             flex-direction: column;
@@ -477,51 +439,18 @@
             line-height: 0;
         }
 
-        .project-pager .pager-divider svg {
-            display: inline-block;
-        }
+        .project-pager .pager-divider svg { display: inline-block; }
 
-        .pager-prev {
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        .pager-prev { text-decoration: none; transition: color 0.3s; }
+        .pager-prev .pager-label { color: var(--text-body); opacity: 0.5; }
+        .pager-prev .pager-title { font-size: 1.05rem; font-weight: 300; color: var(--text-body); }
+        .pager-prev:hover .pager-title { color: var(--china-rose); }
 
-        .pager-prev .pager-label {
-            color: var(--text-body);
-            opacity: 0.5;
-        }
+        .pager-next { text-decoration: none; transition: color 0.3s; }
+        .pager-next .pager-label { color: var(--text-accent); opacity: 0.7; }
+        .pager-next .pager-title { font-size: 1.3rem; font-weight: 400; color: var(--text-accent); }
+        .pager-next:hover .pager-title { color: var(--china-rose); }
 
-        .pager-prev .pager-title {
-            font-size: 1.05rem;
-            font-weight: 300;
-            color: var(--text-body);
-        }
-
-        .pager-prev:hover .pager-title {
-            color: var(--china-rose);
-        }
-
-        .pager-next {
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .pager-next .pager-label {
-            color: var(--text-accent);
-            opacity: 0.7;
-        }
-
-        .pager-next .pager-title {
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: var(--text-accent);
-        }
-
-        .pager-next:hover .pager-title {
-            color: var(--china-rose);
-        }
-
-        /* ========== FOOTER ========== */
         .site-footer {
             background: var(--pale-silver);
             padding: 24px var(--pad);
@@ -554,25 +483,13 @@
             flex-shrink: 0;
         }
 
-        .footer-contact .contact-link {
-            color: var(--text-accent);
-        }
-
+        .footer-contact .contact-link { color: var(--text-accent); }
         .footer-contact .contact-link:hover { color: var(--china-rose); }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 1400px) {
-            .header-top {
-                gap: 12px 20px;
-            }
-
-            .header-contact {
-                gap: 10px 18px;
-            }
-
-            .header-contact .contact-link {
-                font-size: 0.82rem;
-            }
+            .header-top { gap: 12px 20px; }
+            .header-contact { gap: 10px 18px; }
+            .header-contact .contact-link { font-size: 0.82rem; }
         }
 
         @media (max-width: 1024px) {
@@ -580,22 +497,10 @@
         }
 
         @media (max-width: 1200px) {
-            .header-contact {
-                gap: 8px 12px;
-            }
-
-            .header-contact .contact-link {
-                font-size: 0.76rem;
-            }
-
-            .header-top {
-                padding: 18px var(--pad);
-            }
-
-            .header-contact {
-                display: none;
-            }
-
+            .header-contact { gap: 8px 12px; }
+            .header-contact .contact-link { font-size: 0.76rem; }
+            .header-top { padding: 18px var(--pad); }
+            .header-contact { display: none; }
             .hamburger { display: flex; }
             .header-nav { display: none; }
 
@@ -620,9 +525,7 @@
                 width: 100%;
             }
 
-            .header-nav.open li {
-                width: 100%;
-            }
+            .header-nav.open li { width: 100%; }
 
             .header-nav.open a {
                 font-size: 0.92rem;
@@ -630,9 +533,7 @@
                 color: var(--text-primary) !important;
             }
 
-            .header-nav.open a span::after {
-                display: none;
-            }
+            .header-nav.open a span::after { display: none; }
 
             .header-nav.open .mobile-contact {
                 display: flex !important;
@@ -668,38 +569,13 @@
         @media (max-width: 768px) {
             :root { --pad: 28px; --section-gap: 48px; }
 
-            .project-hero h1 {
-                font-size: 2.4rem;
-                white-space: normal;
-                text-align: center;
-            }
-
-            .project-ornament {
-                padding: 20px 0 18px;
-            }
-
-            .project-ornament svg {
-                width: 180px;
-            }
-
-            .project-summary {
-                padding-top: 14px;
-            }
-
-            .project-slide-container {
-                aspect-ratio: 17 / 11;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .project-toolbar {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
+            .project-hero h1 { font-size: 2.4rem; white-space: normal; text-align: center; }
+            .project-ornament { padding: 20px 0 18px; }
+            .project-ornament svg { width: 180px; }
+            .project-summary { padding-top: 14px; }
+            .project-slide-container { aspect-ratio: 17 / 11; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
+            .project-toolbar { flex-wrap: wrap; gap: 12px; }
             .site-footer { padding: 24px var(--pad); }
 
             .footer-inner {
@@ -737,8 +613,8 @@
         </div>
         <nav class="header-nav" id="headerNav">
             <ul>
-                <li><a href="senior-thesis.html" class="active"><span>Capstone Collection</span></a></li>
-                <li><a href="shoe-handbag.html"><span>Shoe &amp; Handbag Designs</span></a></li>
+                <li><a href="senior-thesis.html"><span>Capstone Collection</span></a></li>
+                <li><a href="shoe-handbag.html" class="active"><span>Shoe &amp; Handbag Designs</span></a></li>
                 <li><a href="fsf-case-study.html"><span>Fashion Scholarship Fund</span></a></li>
                 <li><a href="stitched-up.html"><span>Stitched Up</span></a></li>
                 <li><a href="strange-beauty.html"><span>Strange Beauty</span></a></li>
@@ -761,8 +637,8 @@
     <section class="project-hero">
         <div class="content-wrap">
             <div class="project-hero-inner">
-                <h1>Perspective</h1>
-                <span class="project-tag">Fall/Winter 2022</span>
+                <h1>Expression</h1>
+                <span class="project-tag">Spring/Summer 2022</span>
             </div>
         </div>
     </section>
@@ -783,7 +659,7 @@
     <!-- PROJECT SUMMARY -->
     <div class="content-wrap">
         <div class="project-summary">
-            <p>This collection is anchored by a mirrored sculpture, exploring how shifting perspectives can distort form, shape, and perception. Inspired by Futurism and the radical visual language of Giacomo Balla, the work embraces aggressive silhouettes, deep muscular color, and bold geometric energy. Handcrafted textile manipulations and precise laser-cut elements bring this concept to life through experimental craftsmanship and construction.</p>
+            <p>This portfolio presents a designer-focused collection of one-of-a-kind accessories, featuring 12 shoes and 12 bags rooted in contemporary graffiti. The project explores graffiti as a powerful form of expression that communicates emotion and perspective beyond words, challenging traditional definitions of art. By viewing the community itself as the canvas, the collection draws attention to overlooked surfaces and transforms them into sources of creative inspiration. It highlights the evolving relationship between art and fashion, where creativity is unrestricted and boundaries are continuously reimagined.</p>
         </div>
     </div>
 
@@ -791,7 +667,7 @@
     <div class="content-wrap project-display-wrap">
         <div class="project-toolbar">
             <div class="project-toolbar-controls" id="toolbarControls">
-                <span class="project-toolbar-counter" id="projectCounter">01 / 12</span>
+                <span class="project-toolbar-counter" id="projectCounter">01 / 21</span>
                 <div class="project-toolbar-arrows">
                     <button class="toolbar-arrow" id="projectPrev" aria-label="Previous slide">&#8592;</button>
                     <button class="toolbar-arrow" id="projectNext" aria-label="Next slide">&#8594;</button>
@@ -805,35 +681,53 @@
 
         <div class="project-slideshow" id="projectSS">
             <div class="project-slide-container" id="slideContainer">
-                <div class="project-slide active"><img src="images/senior-thesis/01_MGM_Perspective_Title.png" alt="Capstone Collection — Title"></div>
-                <div class="project-slide"><img src="images/senior-thesis/02_MGM_Perspective_Brief.png" alt="Capstone Collection — Brief"></div>
-                <div class="project-slide"><img src="images/senior-thesis/03_MGM_Perspective_Mood_Board.png" alt="Capstone Collection — Mood Board"></div>
-                <div class="project-slide"><img src="images/senior-thesis/04_MGM_Perspective_Manipulations.png" alt="Capstone Collection — Manipulations"></div>
-                <div class="project-slide"><img src="images/senior-thesis/05_MGM_Perspective_Look_1.png" alt="Capstone Collection — Look 1"></div>
-                <div class="project-slide"><img src="images/senior-thesis/06_MGM_Perspective_Look_1_Img.png" alt="Capstone Collection — Look 1 Image"></div>
-                <div class="project-slide"><img src="images/senior-thesis/07_MGM_Perspective_Look_2.png" alt="Capstone Collection — Look 2"></div>
-                <div class="project-slide"><img src="images/senior-thesis/08_MGM_Perspective_Look_2_Img.png" alt="Capstone Collection — Look 2 Image"></div>
-                <div class="project-slide"><img src="images/senior-thesis/09_MGM_Perspective_Look_3.png" alt="Capstone Collection — Look 3"></div>
-                <div class="project-slide"><img src="images/senior-thesis/10_MGM_Perspective_Look_3_Img.png" alt="Capstone Collection — Look 3 Image"></div>
-                <div class="project-slide"><img src="images/senior-thesis/11_MGM_Perspective_Lineup_1.png" alt="Capstone Collection — Lineup 1"></div>
-                <div class="project-slide"><img src="images/senior-thesis/12_MGM_Perspective_Lineup_2.png" alt="Capstone Collection — Lineup 2"></div>
+                <div class="project-slide active"><img src="images/shoe-handbag/01_MGM_Accessory_Portfolio_Title.png" alt="Expression — Title"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/02_MGM_Accessory_Portfolio_Mood_Board.png" alt="Expression — Mood Board"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/03_MGM_Accessory_Portfolio_Brief.png" alt="Expression — Brief"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/04_MGM_Accessory_Portfolio_Customer_Board.png" alt="Expression — Customer Board"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/05_MGM_Accessory_Portfolio_Raw_Materials.png" alt="Expression — Raw Materials"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/06_MGM_Accessory_Portfolio_Bags_1.png" alt="Expression — Bags 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/07_MGM_Accessory_Portfolio_Bags_2.png" alt="Expression — Bags 2"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/08_MGM_Accessory_Portfolio_Bags_3.png" alt="Expression — Bags 3"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/09_MGM_Accessory_Portfolio_Bags_4.png" alt="Expression — Bags 4"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/10_MGM_Accessory_Portfolio_Bag_Flats_1.png" alt="Expression — Bag Flats 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/11_MGM_Accessory_Portfolio_Bag_Flats_2.png" alt="Expression — Bag Flats 2"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/12_MGM_Accessory_Portfolio_Bag_Range_Plan_1.png" alt="Expression — Bag Range Plan 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/13_MGM_Accessory_Portfolio_Bag_Range_Plan_2.png" alt="Expression — Bag Range Plan 2"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/14_MGM_Accessory_Portfolio_Shoes_1.png" alt="Expression — Shoes 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/15_MGM_Accessory_Portfolio_Shoes_2.png" alt="Expression — Shoes 2"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/16_MGM_Accessory_Portfolio_Shoes_3.png" alt="Expression — Shoes 3"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/17_MGM_Accessory_Portfolio_Shoes_4.png" alt="Expression — Shoes 4"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/18_MGM_Accessory_Portfolio_Shoe_Flats_1.png" alt="Expression — Shoe Flats 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/19_MGM_Accessory_Portfolio_Shoe_Flats_2.png" alt="Expression — Shoe Flats 2"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/20_MGM_Accessory_Portfolio_Shoe_Range_Plan_1.png" alt="Expression — Shoe Range Plan 1"></div>
+                <div class="project-slide"><img src="images/shoe-handbag/21_MGM_Accessory_Portfolio_Shoe_Range_Plan_2.png" alt="Expression — Shoe Range Plan 2"></div>
             </div>
         </div>
 
         <div class="project-gallery" id="projectGallery" style="display:none">
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="images/senior-thesis/01_MGM_Perspective_Title.png" alt="Capstone Collection — Title"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/02_MGM_Perspective_Brief.png" alt="Capstone Collection — Brief"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/03_MGM_Perspective_Mood_Board.png" alt="Capstone Collection — Mood Board"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/04_MGM_Perspective_Manipulations.png" alt="Capstone Collection — Manipulations"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/05_MGM_Perspective_Look_1.png" alt="Capstone Collection — Look 1"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/06_MGM_Perspective_Look_1_Img.png" alt="Capstone Collection — Look 1 Image"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/07_MGM_Perspective_Look_2.png" alt="Capstone Collection — Look 2"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/08_MGM_Perspective_Look_2_Img.png" alt="Capstone Collection — Look 2 Image"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/09_MGM_Perspective_Look_3.png" alt="Capstone Collection — Look 3"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/10_MGM_Perspective_Look_3_Img.png" alt="Capstone Collection — Look 3 Image"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/11_MGM_Perspective_Lineup_1.png" alt="Capstone Collection — Lineup 1"></div>
-                <div class="gallery-item"><img src="images/senior-thesis/12_MGM_Perspective_Lineup_2.png" alt="Capstone Collection — Lineup 2"></div>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item"><img src="images/shoe-handbag/01_MGM_Accessory_Portfolio_Title.png" alt="Expression — Title"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/02_MGM_Accessory_Portfolio_Mood_Board.png" alt="Expression — Mood Board"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/03_MGM_Accessory_Portfolio_Brief.png" alt="Expression — Brief"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/04_MGM_Accessory_Portfolio_Customer_Board.png" alt="Expression — Customer Board"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/05_MGM_Accessory_Portfolio_Raw_Materials.png" alt="Expression — Raw Materials"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/06_MGM_Accessory_Portfolio_Bags_1.png" alt="Expression — Bags 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/07_MGM_Accessory_Portfolio_Bags_2.png" alt="Expression — Bags 2"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/08_MGM_Accessory_Portfolio_Bags_3.png" alt="Expression — Bags 3"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/09_MGM_Accessory_Portfolio_Bags_4.png" alt="Expression — Bags 4"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/10_MGM_Accessory_Portfolio_Bag_Flats_1.png" alt="Expression — Bag Flats 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/11_MGM_Accessory_Portfolio_Bag_Flats_2.png" alt="Expression — Bag Flats 2"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/12_MGM_Accessory_Portfolio_Bag_Range_Plan_1.png" alt="Expression — Bag Range Plan 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/13_MGM_Accessory_Portfolio_Bag_Range_Plan_2.png" alt="Expression — Bag Range Plan 2"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/14_MGM_Accessory_Portfolio_Shoes_1.png" alt="Expression — Shoes 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/15_MGM_Accessory_Portfolio_Shoes_2.png" alt="Expression — Shoes 2"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/16_MGM_Accessory_Portfolio_Shoes_3.png" alt="Expression — Shoes 3"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/17_MGM_Accessory_Portfolio_Shoes_4.png" alt="Expression — Shoes 4"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/18_MGM_Accessory_Portfolio_Shoe_Flats_1.png" alt="Expression — Shoe Flats 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/19_MGM_Accessory_Portfolio_Shoe_Flats_2.png" alt="Expression — Shoe Flats 2"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/20_MGM_Accessory_Portfolio_Shoe_Range_Plan_1.png" alt="Expression — Shoe Range Plan 1"></div>
+                <div class="gallery-item"><img src="images/shoe-handbag/21_MGM_Accessory_Portfolio_Shoe_Range_Plan_2.png" alt="Expression — Shoe Range Plan 2"></div>
             </div>
         </div>
     </div>
@@ -841,9 +735,9 @@
     <!-- PROJECT PAGER -->
     <div class="content-wrap">
         <div class="project-pager">
-            <a href="renaissance-romance.html" class="pager-prev">
+            <a href="senior-thesis.html" class="pager-prev">
                 <span class="pager-label">Previous</span>
-                <span class="pager-title">Renaissance Romance</span>
+                <span class="pager-title">Capstone Collection</span>
             </a>
             <div class="pager-divider">
                 <svg width="140" height="16" viewBox="0 0 140 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -854,9 +748,9 @@
                     <path d="M68 8 L70 5.5 L72 8 L70 10.5 Z" fill="#6E0A2C"/>
                 </svg>
             </div>
-            <a href="shoe-handbag.html" class="pager-next">
+            <a href="fsf-case-study.html" class="pager-next">
                 <span class="pager-label">Next</span>
-                <span class="pager-title">Shoe &amp; Handbag Designs</span>
+                <span class="pager-title">Fashion Scholarship Fund</span>
             </a>
         </div>
     </div>
@@ -945,9 +839,6 @@
 
         var hdr = document.getElementById('siteHeader');
 
-        /* ============================================================
-           HERO PADDING — clear the fixed header dynamically
-           ============================================================ */
         function adjustHeroPadding() {
             var hero = document.querySelector('.project-hero');
             var headerH = hdr.offsetHeight;
@@ -956,9 +847,6 @@
         adjustHeroPadding();
         window.addEventListener('resize', adjustHeroPadding);
 
-        /* ============================================================
-           HAMBURGER MENU
-           ============================================================ */
         var menuBtn = document.getElementById('hamburger');
         var menuNav = document.getElementById('headerNav');
         var mobileMenuBreakpoint = 680;
