@@ -472,10 +472,12 @@
         }
 
         .project-pager .pager-divider {
-            width: 40px;
-            height: 1px;
-            background: var(--pale-pink);
             margin: 22px auto;
+            line-height: 0;
+        }
+
+        .project-pager .pager-divider svg {
+            display: inline-block;
         }
 
         .pager-prev {
@@ -880,7 +882,15 @@
                 <span class="pager-label">Previous</span>
                 <span class="pager-title">Renaissance Romance</span>
             </a>
-            <div class="pager-divider"></div>
+            <div class="pager-divider">
+                <svg width="140" height="16" viewBox="0 0 140 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="12" y1="8" x2="38" y2="8" stroke="#6E0A2C" stroke-width="0.5" opacity="0.35"/>
+                    <path d="M70 8 C63 8, 60 2, 51 2 C42 2, 39 8, 44 12 C47 14, 49 10, 46 8 C43 6, 39 8, 38 8" stroke="#6E0A2C" stroke-width="0.9" stroke-linecap="round" fill="none"/>
+                    <path d="M70 8 C77 8, 80 2, 89 2 C98 2, 101 8, 96 12 C93 14, 91 10, 94 8 C97 6, 101 8, 102 8" stroke="#6E0A2C" stroke-width="0.9" stroke-linecap="round" fill="none"/>
+                    <line x1="102" y1="8" x2="128" y2="8" stroke="#6E0A2C" stroke-width="0.5" opacity="0.35"/>
+                    <path d="M68 8 L70 5.5 L72 8 L70 10.5 Z" fill="#6E0A2C"/>
+                </svg>
+            </div>
             <a href="shoe-handbag.html" class="pager-next">
                 <span class="pager-label">Next</span>
                 <span class="pager-title">Shoe &amp; Handbag Designs</span>
