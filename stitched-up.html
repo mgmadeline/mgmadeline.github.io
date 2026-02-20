@@ -194,6 +194,7 @@
             color: var(--text-primary);
             line-height: 1.18;
             margin-bottom: 8px;
+            white-space: nowrap;
         }
 
         .project-tag {
@@ -266,7 +267,7 @@
 
         .project-gallery { max-width: var(--max-w); margin: 0 auto; }
         .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .gallery-grid.single-col { grid-template-columns: 1fr; }
+        .gallery-grid .gallery-item:first-child { grid-column: 1 / -1; }
         .gallery-item { border: 1px solid var(--blush-mist); overflow: hidden; background: var(--blush-whisper); }
         .gallery-item img { width: 100%; display: block; }
 
@@ -429,7 +430,6 @@
             <div class="view-toggle" id="viewToggle">
                 <button class="view-btn active" data-view="slideshow">Slideshow</button>
                 <button class="view-btn" data-view="gallery">Gallery</button>
-                <button class="view-btn" data-view="single">1 &times; 1</button>
             </div>
         </div>
 
@@ -552,7 +552,6 @@
             var ssEl = document.getElementById('projectSS');
             var galEl = document.getElementById('projectGallery');
             var controlsEl = document.getElementById('toolbarControls');
-            var gridEl = document.getElementById('galleryGrid');
             var btns = toggle.querySelectorAll('.view-btn');
 
             btns.forEach(function(btn) {
@@ -565,16 +564,10 @@
                         ssEl.style.display = '';
                         galEl.style.display = 'none';
                         controlsEl.style.display = '';
-                    } else if (view === 'gallery') {
+                    } else {
                         ssEl.style.display = 'none';
                         galEl.style.display = '';
                         controlsEl.style.display = 'none';
-                        gridEl.classList.remove('single-col');
-                    } else if (view === 'single') {
-                        ssEl.style.display = 'none';
-                        galEl.style.display = '';
-                        controlsEl.style.display = 'none';
-                        gridEl.classList.add('single-col');
                     }
                 });
             });
