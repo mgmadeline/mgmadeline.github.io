@@ -290,12 +290,59 @@
             margin-bottom: 0;
         }
 
-        /* ========== VIEW TOGGLE ========== */
+        /* ========== VIEW TOGGLE + TOOLBAR ========== */
+        .project-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 0 24px;
+        }
+
+        .project-toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .project-toolbar-counter {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-body);
+        }
+
+        .project-toolbar-arrows {
+            display: flex;
+            gap: 1px;
+        }
+
+        .toolbar-arrow {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--blush-mist);
+            background: transparent;
+            color: var(--text-body);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .toolbar-arrow:hover {
+            background: var(--blush-mist);
+            color: var(--text-accent);
+            border-color: var(--pale-pink);
+        }
+
+        .toolbar-arrow + .toolbar-arrow {
+            margin-left: -1px;
+        }
+
         .view-toggle {
             display: flex;
             gap: 24px;
-            justify-content: flex-end;
-            padding: 36px 0 24px;
         }
 
         .view-btn {
@@ -353,7 +400,7 @@
         .project-slide-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 17 / 11;
         }
 
         .project-slide {
@@ -372,78 +419,14 @@
         .project-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
-        }
-
-        .project-nav {
-            position: absolute;
-            bottom: 24px;
-            left: 24px;
-            background: rgba(0,0,0,0.28);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            z-index: 10;
-        }
-
-        .project-counter {
-            font-size: 0.68rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.7);
-        }
-
-        .project-arrows {
-            display: flex;
-            gap: 1px;
-        }
-
-        .project-arrow {
-            width: 44px;
-            height: 44px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: transparent;
-            color: rgba(255,255,255,0.65);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .project-arrow:hover {
-            background: rgba(255,255,255,0.08);
-            color: #fff;
-            border-color: rgba(255,255,255,0.4);
-        }
-
-        .project-arrow + .project-arrow {
-            margin-left: -1px;
         }
 
         /* ========== PROJECT GALLERY ========== */
         .project-gallery {
             max-width: var(--max-w);
             margin: 0 auto;
-        }
-
-        .gallery-hero {
-            width: 100%;
-            margin-bottom: 24px;
-            border: 1px solid var(--blush-mist);
-            overflow: hidden;
-            background: var(--blush-whisper);
-        }
-
-        .gallery-hero img {
-            width: 100%;
-            display: block;
         }
 
         .gallery-grid {
@@ -461,16 +444,6 @@
         .gallery-item img {
             width: 100%;
             display: block;
-        }
-
-        /* ========== EMPTY STATE ========== */
-        .project-empty {
-            text-align: center;
-            padding: 80px 0;
-            color: var(--text-body);
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 0.04em;
         }
 
         /* ========== PROJECT NAVIGATION (prev/next) ========== */
@@ -750,19 +723,7 @@
             }
 
             .project-slide-container {
-                aspect-ratio: 4 / 3;
-            }
-
-            .project-nav {
-                bottom: 16px;
-                left: 16px;
-                padding: 10px 14px;
-                gap: 12px;
-            }
-
-            .project-arrow {
-                width: 38px;
-                height: 38px;
+                aspect-ratio: 17 / 11;
             }
 
             .gallery-grid {
@@ -770,8 +731,9 @@
                 gap: 16px;
             }
 
-            .gallery-hero {
-                margin-bottom: 16px;
+            .project-toolbar {
+                flex-wrap: wrap;
+                gap: 12px;
             }
 
             .site-footer { padding: 24px var(--pad); }
@@ -860,11 +822,20 @@
         </div>
     </div>
 
-    <!-- VIEW TOGGLE + SLIDESHOW / GALLERY -->
+    <!-- TOOLBAR + SLIDESHOW / GALLERY -->
     <div class="content-wrap project-display-wrap">
-        <div class="view-toggle" id="viewToggle">
-            <button class="view-btn active" data-view="slideshow">Slideshow</button>
-            <button class="view-btn" data-view="gallery">Gallery</button>
+        <div class="project-toolbar">
+            <div class="project-toolbar-controls" id="toolbarControls">
+                <span class="project-toolbar-counter" id="projectCounter">01 / 12</span>
+                <div class="project-toolbar-arrows">
+                    <button class="toolbar-arrow" id="projectPrev" aria-label="Previous slide">&#8592;</button>
+                    <button class="toolbar-arrow" id="projectNext" aria-label="Next slide">&#8594;</button>
+                </div>
+            </div>
+            <div class="view-toggle" id="viewToggle">
+                <button class="view-btn active" data-view="slideshow">Slideshow</button>
+                <button class="view-btn" data-view="gallery">Gallery</button>
+            </div>
         </div>
 
         <div class="project-slideshow" id="projectSS">
@@ -882,18 +853,11 @@
                 <div class="project-slide"><img src="images/senior-thesis/11_MGM_Perspective_Lineup_1.png" alt="Capstone Collection — Lineup 1"></div>
                 <div class="project-slide"><img src="images/senior-thesis/12_MGM_Perspective_Lineup_2.png" alt="Capstone Collection — Lineup 2"></div>
             </div>
-            <div class="project-nav">
-                <span class="project-counter" id="projectCounter">01 / 12</span>
-                <div class="project-arrows">
-                    <button class="project-arrow" id="projectPrev" aria-label="Previous slide">&#8592;</button>
-                    <button class="project-arrow" id="projectNext" aria-label="Next slide">&#8594;</button>
-                </div>
-            </div>
         </div>
 
         <div class="project-gallery" id="projectGallery" style="display:none">
-            <div class="gallery-hero"><img src="images/senior-thesis/01_MGM_Perspective_Title.png" alt="Capstone Collection — Title"></div>
             <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/senior-thesis/01_MGM_Perspective_Title.png" alt="Capstone Collection — Title"></div>
                 <div class="gallery-item"><img src="images/senior-thesis/02_MGM_Perspective_Brief.png" alt="Capstone Collection — Brief"></div>
                 <div class="gallery-item"><img src="images/senior-thesis/03_MGM_Perspective_Mood_Board.png" alt="Capstone Collection — Mood Board"></div>
                 <div class="gallery-item"><img src="images/senior-thesis/04_MGM_Perspective_Manipulations.png" alt="Capstone Collection — Manipulations"></div>
@@ -982,6 +946,7 @@
             var toggle = document.getElementById('viewToggle');
             var ssEl = document.getElementById('projectSS');
             var galEl = document.getElementById('projectGallery');
+            var controlsEl = document.getElementById('toolbarControls');
             var btns = toggle.querySelectorAll('.view-btn');
 
             btns.forEach(function(btn) {
@@ -993,9 +958,11 @@
                     if (view === 'slideshow') {
                         ssEl.style.display = '';
                         galEl.style.display = 'none';
+                        controlsEl.style.display = '';
                     } else {
                         ssEl.style.display = 'none';
                         galEl.style.display = '';
+                        controlsEl.style.display = 'none';
                     }
                 });
             });
