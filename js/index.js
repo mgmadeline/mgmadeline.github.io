@@ -36,8 +36,8 @@
         var hero = slideshow(heroSlides, heroCounter, {
             onUpdate: function(i) {
                 if (dEl) dEl.textContent = heroData[i].desc;
-                if (lEl) {
-                    lEl.href = heroData[i].link;
+                if (lEl) lEl.href = heroData[i].link;
+                if (tEl) {
                     if (i === 2) {
                         tEl.innerHTML = 'Rent The Runway X <span class="title-no-wrap">Stitched Up</span>';
                     } else {
